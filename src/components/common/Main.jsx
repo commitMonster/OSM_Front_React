@@ -6,7 +6,7 @@ import Banner from "./Banner";
 import { Box, ImageList, ImageListItem, Typography } from "@material-ui/core";
 import ProductThumb from "../product/ProductThumb";
 
-export default function Main({ newProduct, loading, banners }) {
+export default function Main({ newProducts, loading, banners }) {
   return (
     <React.Fragment>
       <Banner banners={banners} />
@@ -45,7 +45,7 @@ export default function Main({ newProduct, loading, banners }) {
               padding: "0.5rem 0 0 0.5rem",
             }}
           >
-            {newProduct.map((product) => (
+            {newProducts.map((product) => (
               <ImageListItem
                 key={product.id}
                 sx={{

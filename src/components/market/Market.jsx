@@ -8,23 +8,17 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
   Radio,
   RadioGroup,
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
-import Footer from "../common/Footer";
-import Header from "../common/Header";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import React, { useEffect, useState } from "react";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ProductThumb from "../product/ProductThumb";
-import Pagination from "./Pagination";
-import { SettingsRemoteOutlined } from "@material-ui/icons";
+import Pagination from "@material-ui/core/Pagination";
+import { Helmet } from "react-helmet-async";
 
 const activeTypo = (orderBy, state, title) => {
   return orderBy === state ? (
@@ -37,7 +31,7 @@ const activeTypo = (orderBy, state, title) => {
 const orderByList = [
   {
     id: "createdAt",
-    title: "최근 업데이트 순",
+    title: "등록 순",
   },
   {
     id: "score",
@@ -58,6 +52,33 @@ const orderByList = [
   {
     id: "count",
     title: "재고 순",
+  },
+];
+
+const categoryList = [
+  {
+    id: "",
+    title: "ALL",
+  },
+  {
+    id: "1",
+    title: "티셔츠",
+  },
+  {
+    id: "2",
+    title: "과잠",
+  },
+  {
+    id: "3",
+    title: "텀블러",
+  },
+  {
+    id: "4",
+    title: "스티커",
+  },
+  {
+    id: "5",
+    title: "담요",
   },
 ];
 
@@ -94,6 +115,9 @@ const Market = ({
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>EC몰 | 상품보기</title>
+      </Helmet>
       <Grid container>
         <Grid
           item
@@ -112,57 +136,16 @@ const Market = ({
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
               >
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value=""
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="All"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
-
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="티셔츠"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
-
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="과잠"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
-
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="텀블러"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="스티커"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
-                <ListItem button alignItems="center" sx={{ padding: "0" }}>
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio sx={{ color: "#3887A6 !important" }} />}
-                    label="담요"
-                    sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
-                  />
-                </ListItem>
+                {categoryList.map((item) => (
+                  <ListItem button alignItems="center" sx={{ padding: "0" }}>
+                    <FormControlLabel
+                      value={item.id}
+                      control={<Radio sx={{ color: "#3887A6 !important" }} />}
+                      label={item.title}
+                      sx={{ width: "100%", margin: "0", padding: "0.5rem" }}
+                    />
+                  </ListItem>
+                ))}
                 <Divider />
                 <List component="nav">
                   <Grid container p={2} alignItems="center">
@@ -173,6 +156,7 @@ const Market = ({
                       <TextField
                         size="small"
                         value={minPrice}
+                        fullWidth
                         onChange={(e) => setMinPrice(e.target.value)}
                       />
                     </Grid>
@@ -184,6 +168,7 @@ const Market = ({
                     <Grid item xs={8}>
                       <TextField
                         size="small"
+                        fullWidth
                         value={maxPrice}
                         onChange={(e) => setMaxPrice(e.target.value)}
                       />
@@ -215,7 +200,9 @@ const Market = ({
               <Button
                 color="inherit"
                 onClick={() => {
-                  sort === "desc"
+                  orderBy !== item.id
+                    ? onSortChange(item.id, "desc")
+                    : sort === "desc"
                     ? onSortChange(item.id, "asc")
                     : onSortChange(item.id, "desc");
                 }}
@@ -223,9 +210,15 @@ const Market = ({
                 {activeTypo(orderBy, item.id, item.title)}
                 {orderBy === item.id &&
                   (sort === "desc" ? (
-                    <ArrowDropDownIcon />
+                    <ArrowDropDownIcon
+                      color="inherit"
+                      sx={{ color: "#3887A6" }}
+                    />
                   ) : (
-                    <ArrowDropUpIcon />
+                    <ArrowDropUpIcon
+                      color="inherit"
+                      sx={{ color: "#3887A6" }}
+                    />
                   ))}
               </Button>
             ))}
@@ -246,13 +239,14 @@ const Market = ({
             ))}
           </Box>
           <Box
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
           >
-            <Pagination
-              page={page}
-              lastPage={lastPage}
-              onPageChange={onPageChange}
-            />
+            <Pagination count={lastPage} page={page} onChange={onPageChange} />
           </Box>
         </Grid>
       </Grid>

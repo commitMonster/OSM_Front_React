@@ -2,68 +2,123 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
+  Input,
+  Rating,
+  TextField,
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React from "react";
+import React, { useReducer, useRef, useState } from "react";
 import Header from "../common/Header";
 import Footer from "../common/Footer";
+import StarRatings from "react-star-ratings";
+import { Helmet } from "react-helmet-async";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-const Product = ({ product, user }) => {
+const ShowImg = styled.img`
+  ${(props) =>
+    props.selected &&
+    css`
+      border: 2px solid rgb(67, 80, 165);
+    `}
+`;
+
+const Product = ({ product, onAddBasket }) => {
   const price = product.price.toLocaleString("ko") + "원";
+  const baseURL = "https://shop.dnatuna.fun/api/";
 
+  const [showImg, setShowImg] = useState(baseURL + product.image[0]);
   const isMobile = useMediaQuery("(max-width: 568px)");
+  const isRow = useMediaQuery("(max-width: 959px)");
+  const countRef = useRef();
+  console.log(showImg);
+  const handelAddBasket = () => {
+    onAddBasket(product.id, parseInt(countRef.current.value, 10));
+  };
+
   return (
     <React.Fragment>
+      <Helmet>
+        <title>EC몰 | {product.name}</title>
+      </Helmet>
       <Container maxWidth="lg">
         <Grid container spacing={4} pt={2}>
           <Grid
             item
+            container
             xs={12}
-            md={4}
+            md={5}
             alignItems="center"
             justifyContent="center"
-            sx={{
-              width: "25rem",
-              height: "25rem",
-            }}
           >
-            <Box
+            <Grid
+              container
+              item
+              spacing={2}
+              xs={12}
+              md={2}
+              flexDirection={isRow ? "row" : "column"}
+              justifyContent="center"
+            >
+              {product.image.map((item, index) => (
+                <Grid item key={index}>
+                  <ShowImg
+                    src={`${baseURL}${item}`}
+                    alt=""
+                    selected={showImg === `${baseURL}${item}`}
+                    onMouseEnter={() => setShowImg(baseURL + item)}
+                    style={{
+                      width: "3rem",
+                      height: "3rem",
+                      objectFit: "cover",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+            <Grid
+              container
+              item
+              xs={12}
+              md={10}
+              justifyContent="center"
               sx={{
-                width: "100%",
-                height: "100%",
-                backgroundImage: `url(http://localhost:3000/${product.image[0]})`,
+                width: "30rem",
+                height: "30rem",
+                backgroundImage: `url(${showImg})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
               }}
-            />
+            ></Grid>
           </Grid>
           <Grid
             item
             container
-            xs={10}
-            md={7}
-            direction="column"
-            spacing={4}
-            alignItems="flex-end"
-            sx={{ margin: "0 auto", height: "25rem" }}
+            xs={12}
+            md={6}
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
           >
-            <Grid
-              item
-              container
-              spacing={!isMobile && 2}
-              sx={{ marginTop: "1rem" }}
-            >
+            <Grid item container pb={1} xs={12}>
               <Grid item container direction="column" xs={10}>
                 <Grid item>
-                  <Typography variant="h2">{product.name}</Typography>
+                  <Typography variant="h4">{product.name}</Typography>
                 </Grid>
                 <Grid item>
-                  <Typography variant="p">{product.description}</Typography>
+                  <Rating
+                    name="score"
+                    value={product.score}
+                    readOnly
+                    precision={0.5}
+                  />
                 </Grid>
               </Grid>
               <Grid container item xs={1} alignItems="center">
@@ -81,17 +136,57 @@ const Product = ({ product, user }) => {
               <Grid container item xs={1} alignItems="center">
                 <ShareIcon fontSize="large" />
               </Grid>
+              <Grid
+                container
+                item
+                xs={12}
+                mt={1}
+                sx={{ borderBottom: "1px solid gray" }}
+              >
+                <Divider />
+              </Grid>
             </Grid>
-            <Grid item spacing={!isMobile && 2}>
-              <Typography variant="h4">{price}</Typography>
+            <Grid item xs={9} md={12}>
+              <Typography variant="h4">가격 : {price}</Typography>
+              <Typography variant="P">남은 수량 : {product.count}</Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs={9} md={12}>
+              <Typography variant="P">
+                배송비 : {product.delivery.toLocaleString("ko") + "원"}
+              </Typography>
+            </Grid>
+            <Grid item xs={3} md={2}>
+              <TextField
+                type="number"
+                fullWidth
+                label="수량(개)"
+                autoFocus
+                defaultValue={1}
+                size="small"
+                required
+                InputProps={{ inputProps: { min: 1 } }}
+                inputRef={countRef}
+              />
+            </Grid>
+            <Grid item xs={6} md={5}>
               <Button
+                fullWidth
+                variant="outlined"
+                disableElevation
+                sx={{ color: "#1B7EA6" }}
+                onClick={handelAddBasket}
+              >
+                장바구니에 넣기
+              </Button>
+            </Grid>
+            <Grid item xs={6} md={5}>
+              <Button
+                fullWidth
                 variant="contained"
                 disableElevation
                 sx={{ color: "white", backgroundColor: "#1B7EA6" }}
               >
-                구매
+                구매 하기
               </Button>
             </Grid>
           </Grid>

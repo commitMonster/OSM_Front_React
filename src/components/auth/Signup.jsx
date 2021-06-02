@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useRef } from "react";
 import { Link as LinkRoute } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Copyright(props) {
   return (
@@ -62,6 +63,9 @@ export default function Signup({
   };
   return (
     <Container component="main" maxWidth="xs">
+      <Helmet>
+        <title>EC몰 | 회원가입</title>
+      </Helmet>
       <Box
         sx={{
           marginTop: 8,
@@ -117,24 +121,7 @@ export default function Signup({
                 name="id"
                 autoComplete="id"
                 inputRef={userIdRef}
-                sx={
-                  idCheck && {
-                    "& .MuiInputLabel-root": {
-                      color: "red",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "red",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "red",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "red",
-                      },
-                    },
-                  }
-                }
+                error={idCheck}
                 onChange={() => {
                   onCheckId(userIdRef.current.value);
                 }}
@@ -160,24 +147,7 @@ export default function Signup({
                 name="email"
                 autoComplete="email"
                 inputRef={emailRef}
-                sx={
-                  emailCheck && {
-                    "& .MuiInputLabel-root": {
-                      color: "red",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "red",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "red",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "red",
-                      },
-                    },
-                  }
-                }
+                error={emailCheck}
                 onChange={() => {
                   onCheckEmail(emailRef.current.value);
                 }}
@@ -239,7 +209,7 @@ export default function Signup({
           <Grid container justifyContent="flex-end">
             <Grid item>
               <LinkRoute
-                to="/login"
+                to="/signin"
                 css={css`
                   font-size: 0.8rem;
                   color: #1b7ea6;

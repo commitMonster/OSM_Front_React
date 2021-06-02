@@ -1,4 +1,3 @@
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import {
   Card,
   CardActionArea,
@@ -12,6 +11,8 @@ import { Link } from "react-router-dom";
 
 const ProductThumb = ({ product }) => {
   const price = product.price.toLocaleString("ko") + "원";
+  const baseURL = "https://shop.dnatuna.fun/api/";
+
   return (
     <Link to={`/product/${product.id}`}>
       <Card
@@ -23,7 +24,7 @@ const ProductThumb = ({ product }) => {
         <CardActionArea>
           <CardMedia
             sx={{ height: 250, backgroundSize: "contain" }}
-            image={`http://localhost:3000/${product.image[0]}`}
+            image={`${baseURL}${product.image[0]}`}
             title={product.name}
           />
           <CardContent>

@@ -16,6 +16,7 @@ import { useRef } from "react";
 import { useHistory } from "react-router";
 import { Link as LinkRoute } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import { Helmet } from "react-helmet-async";
 
 function Copyright(props) {
   return (
@@ -57,6 +58,9 @@ export default function Signin({ onLogin, onOauthKakao, onOauthGoogle }) {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Helmet>
+        <title>EC몰 | 로그인</title>
+      </Helmet>
       <Box
         sx={{
           marginTop: 8,

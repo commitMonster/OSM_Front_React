@@ -4,6 +4,9 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 function Banner({ banners }) {
+  console.log(banners);
+  const baseURL = "https://shop.dnatuna.fun/api/";
+
   return (
     <Paper
       sx={{
@@ -13,11 +16,11 @@ function Banner({ banners }) {
       <Slide easing="ease" transitionDuration="500" indicators={true}>
         {banners.map((item) => (
           <img
-            src={`${item.image[0]}`}
+            src={`${baseURL}${item.image[0]}`}
             alt="img"
             style={{
               width: "100%",
-              height: "auto",
+              height: "500px",
               objectFit: "contain",
             }}
           />

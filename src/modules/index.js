@@ -1,27 +1,33 @@
 import { combineReducers } from "redux";
 import products, { productsSaga } from "./products";
-import product, { productSaga } from "./product";
 import user, { userSaga } from "./user";
 import auth, { authSaga } from "./auth";
-import banner, { bannerSaga } from "./banner";
+import basket, { basketSaga } from "./basket";
 import loading from "./loading";
 import { all } from "redux-saga/effects";
+import banners, { bannersSaga } from "./banners";
+import images, { imagesSaga } from "./images";
+import write, { writeSaga } from "./write";
 
 const rootReducer = combineReducers({
   products,
-  product,
-  user,
-  banner,
+  banners,
   auth,
+  user,
+  basket,
+  images,
   loading,
+  write,
 });
 export function* rootSaga() {
   yield all([
     productsSaga(),
+    bannersSaga(),
     authSaga(),
-    bannerSaga(),
-    productSaga(),
     userSaga(),
+    basketSaga(),
+    imagesSaga(),
+    writeSaga(),
   ]);
 }
 

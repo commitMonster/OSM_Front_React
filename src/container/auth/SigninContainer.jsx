@@ -35,12 +35,12 @@ const SigninContainer = (props) => {
   // user 정보 확인
   useEffect(() => {
     if (user) {
-      history.push("/");
-    }
-    try {
-      localStorage.setItem("user", JSON.stringify(user));
-    } catch (e) {
-      console.log("localStorage is not working");
+      if (user.isAdmin) {
+        alert("관리자님 환영합니다!");
+        history.push("/admin");
+      } else {
+        history.push("/");
+      }
     }
   }, [user, history]);
 

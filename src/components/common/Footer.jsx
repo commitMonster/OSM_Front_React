@@ -45,7 +45,7 @@ const Footer = () => {
             <img
               src="https://i.postimg.cc/g0Hz53j3/2021-05-01-10-35-36.png"
               alt="logo"
-              style={{ width: "10rem", height: "10rem" }}
+              style={{ width: "6rem", height: "6rem" }}
             />
           </Grid>
           <Grid

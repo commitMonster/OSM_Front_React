@@ -5,15 +5,14 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from "../lib/utils/createRequestSaga";
 
-const TEMP_SET_USER = "user/TEMP_SET_USER"; // 새로고침 이후 임시 로그인 처리
-// 회원 정보 확인
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
   createRequestActionTypes("user/CHECK");
 const SIGNOUT = "user/SIGNOUT";
+const INITIAL_USER = "user/INITIAL_USER";
 
-export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
 export const check = createAction(CHECK);
 export const signout = createAction(SIGNOUT);
+export const initialUser = createAction(INITIAL_USER);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.userCheck);
 function checkFailureSaga() {
@@ -40,18 +39,17 @@ export function* userSaga() {
 
 const initialState = {
   user: null,
+  count: 0,
   checkError: null,
 };
 
 export default handleActions(
   {
-    [TEMP_SET_USER]: (state, { payload: user }) => ({
-      ...state,
-      user,
-    }),
+    [INITIAL_USER]: (state) => initialState,
     [CHECK_SUCCESS]: (state, { payload: user }) => ({
       ...state,
-      user,
+      user: user.user,
+      count: user.count,
       checkError: null,
     }),
     [CHECK_FAILURE]: (state, { payload: error }) => ({

@@ -3,7 +3,7 @@ import axios from "axios";
 export const signin = async ({ userId, password }) => {
   const response = await axios({
     method: "post",
-    url: "/auth/signin",
+    url: "/api/auth/signin",
     data: {
       userId: userId,
       password: password,
@@ -15,7 +15,7 @@ export const signin = async ({ userId, password }) => {
 export const signout = async () => {
   const response = await axios({
     method: "post",
-    url: "/auth/signout",
+    url: "/api/auth/signout",
   });
   return response;
 };
@@ -23,7 +23,7 @@ export const signout = async () => {
 export const signup = async ({ userId, email, password, name }) => {
   const response = await axios({
     method: "post",
-    url: "/auth/signup",
+    url: "/api/auth/signup",
     data: {
       userId: userId,
       email: email,
@@ -38,7 +38,7 @@ export const signup = async ({ userId, email, password, name }) => {
 export const duplicationCheck = async ({ type, payload }) => {
   const response = await axios({
     method: "post",
-    url: `/auth/check/${type}`,
+    url: `/api/auth/check/${type}`,
     data:
       type === "userId"
         ? {
@@ -54,7 +54,7 @@ export const duplicationCheck = async ({ type, payload }) => {
 export const userCheck = async () => {
   const response = await axios({
     method: "get",
-    url: "/auth",
+    url: "/api/auth",
   });
   return response;
 };

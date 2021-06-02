@@ -8,8 +8,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Avatar, Container, TextField, useMediaQuery } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signout } from "../../modules/user";
-import { useRef, memo } from "react";
+import { initialUser, signout } from "../../modules/user";
+import { useRef, memo, useState } from "react";
 
 const sections = [
   { title: "Market", url: "market" },
@@ -19,15 +19,17 @@ const sections = [
   { title: "About", url: "#" },
 ];
 
-function Header({ user, count, onSearch }) {
+function Header({ user, count, onSearch, query }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const isMobile = useMediaQuery("(max-width: 568px)");
-  const qRef = useRef();
+  const [q, setQ] = useState(query);
 
+  const onQueryChange = (e) => {
+    setQ(e.target.value);
+  };
   const handleSearch = () => {
-    onSearch(qRef.current.value);
-    qRef.current.value = "";
+    onSearch(q);
   };
 
   const onKeyPress = (e) => {
@@ -76,17 +78,22 @@ function Header({ user, count, onSearch }) {
           )}
 
           <TextField
-            label="아이템 검색하기"
+            label="상품 검색"
             size="small"
             sx={{ flex: 3 }}
-            inputRef={qRef}
+            value={q}
+            onChange={onQueryChange}
             onKeyPress={onKeyPress}
           />
           <IconButton>
             <SearchIcon onClick={handleSearch} />
           </IconButton>
           <IconButton>
-            <ShoppingCartIcon />
+            <ShoppingCartIcon
+              onClick={() => {
+                history.push("/basket");
+              }}
+            />
           </IconButton>
           <Avatar
             sx={{
@@ -106,19 +113,20 @@ function Header({ user, count, onSearch }) {
               sx={{ textDecoration: "none" }}
               onClick={() => {
                 dispatch(signout());
+                dispatch(initialUser());
                 history.push("/");
               }}
             >
-              LOG OUT
+              SIGN OUT
             </Button>
           ) : (
-            <Link to="/signup">
+            <Link to="/signin">
               <Button
                 variant="outlined"
                 size="small"
                 sx={{ textDecoration: "none" }}
               >
-                Sign up
+                Sign In
               </Button>
             </Link>
           )}

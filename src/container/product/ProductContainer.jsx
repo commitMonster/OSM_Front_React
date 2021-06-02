@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Product from "../../components/product/Product";
-import { getProduct, unloadproduct } from "../../modules/product";
+import { addBasket, getBasketList, initialCurrent } from "../../modules/basket";
+import { getProduct, unloadproduct } from "../../modules/products";
+import { check } from "../../modules/user";
 
 const ProductContainer = ({ productId }) => {
-  const history = useHistory();
-  const { product, error, loading, user } = useSelector(
-    ({ product, loading, user }) => ({
-      product: product.product,
-      error: product.error,
+  const { product, currentItem, error, loading } = useSelector(
+    ({ products, loading, basket }) => ({
+      product: products.product,
+      currentItem: basket.currentItem,
+      error: products.error,
       loading: loading["post/READ_POST"],
-      user: user.user,
     })
   );
   const dispatch = useDispatch();
@@ -24,17 +25,31 @@ const ProductContainer = ({ productId }) => {
     };
   }, [dispatch, productId]);
 
-  // const handleBuyProduct = () => {
-  //   window.confirm("구매가 완료되었습니다");
-  //   dispatch(buyProduct(data.id));
-  //   history.push("/mypage");
-  // };
+  const onAddBasket = (productId, count) => {
+    if (product.count < count) {
+      window.confirm("재고가 부족합니다");
+    } else {
+      dispatch(addBasket({ productId, count }));
+    }
+  };
+
+  useEffect(() => {
+    dispatch(initialCurrent());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (currentItem !== null) {
+      dispatch(check());
+      dispatch(getProduct(productId));
+      window.confirm("장바구니에 추가되었습니다");
+    }
+  }, [dispatch, currentItem, productId]);
 
   if (loading && !product) return <div>로딩중...</div>; // 로딩중이면서, 데이터가 없을 때에만 로딩중... 표시
   if (error) return <div>에러 발생!</div>;
   if (!product) return null;
 
-  return <Product product={product} user={user} />;
+  return <Product product={product} onAddBasket={onAddBasket} />;
 };
 
 export default ProductContainer;
