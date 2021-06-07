@@ -8,39 +8,21 @@ import { check } from "../../modules/user";
 const HeaderContainer = ({ location }) => {
   const { user, count } = useSelector((state) => state.user);
   const history = useHistory();
-
-  const {
-    q,
-    orderBy = "createdAt",
-    sort = "desc",
-    isPriceRange,
-    minPrice,
-    maxPrice,
-    categoryId = "",
-    isDeleted,
-    pageSize = 10,
-    page = 1,
-  } = qs.parse(location.search, {
+  const params = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
 
   const onSearch = (q) => {
     const query = qs.stringify({
+      ...params,
       q: q,
-      orderBy,
-      sort,
-      isPriceRange,
-      minPrice,
-      maxPrice,
-      categoryId,
-      isDeleted,
-      pageSize,
-      page,
     });
     history.push(`/market/?${query}`);
   };
 
-  return <Header user={user} count={count} onSearch={onSearch} query={q} />;
+  return (
+    <Header user={user} count={count} onSearch={onSearch} query={params.q} />
+  );
 };
 
 export default withRouter(HeaderContainer);

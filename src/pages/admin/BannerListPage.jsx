@@ -1,12 +1,14 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
-import BannerListContainer from "../../container/admin/banners/BannerListContainer";
+import BannerListTableContainer from "../../container/admin/banners/BannerListTableContainer";
+import BannerListToolbarContainer from "../../container/admin/banners/BannerListToolbarContainer";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 
 function BannerListPage() {
   return (
-    <DashboardLayout>
-      <BannerListContainer />
-    </DashboardLayout>
+    <DashboardLayoutContainer>
+      <BannerListToolbarContainer />
+      <BannerListTableContainer />
+    </DashboardLayoutContainer>
   );
 }
 

@@ -2,7 +2,6 @@
   "name": "hippy_front",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hippy.dnatuna.fun/",
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
@@ -10,7 +9,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.21",
     "@material-ui/docs": "5.0.0-alpha.31",
     "@material-ui/icons": "5.0.0-alpha.29",
-    "@material-ui/lab": "5.0.0-alpha.32",
+    "@material-ui/lab": "next",
     "@material-ui/styled-engine": "5.0.0-alpha.26",
     "@material-ui/styled-engine-sc": "5.0.0-alpha.26",
     "@material-ui/styles": "5.0.0-alpha.32",
@@ -19,8 +18,10 @@
     "@material-ui/unstyled": "5.0.0-alpha.32",
     "axios": "^0.21.1",
     "chart.js": "^3.3.0",
+    "date-fns": "latest",
     "gh-pages": "^3.1.0",
     "history": "^5.0.0",
+    "http-proxy-middleware": "^2.0.0",
     "ipfs-api": "^26.1.2",
     "lodash": "^4.17.21",
     "material-ui-dropzone": "^3.5.0",
@@ -30,6 +31,7 @@
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
+    "react-daum-postcode": "^2.0.6",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-google-login": "^5.2.2",
@@ -79,6 +81,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://shop.dnatuna.fun"
+  }
 }

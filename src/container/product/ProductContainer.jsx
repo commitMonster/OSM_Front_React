@@ -1,35 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Product from "../../components/product/Product";
-import { addBasket, getBasketList, initialCurrent } from "../../modules/basket";
+import { addBasket, initialCurrent } from "../../modules/basket";
+import { setOrder } from "../../modules/order";
 import { getProduct, unloadproduct } from "../../modules/products";
 import { check } from "../../modules/user";
 
 const ProductContainer = ({ productId }) => {
-  const { product, currentItem, error, loading } = useSelector(
-    ({ products, loading, basket }) => ({
-      product: products.product,
-      currentItem: basket.currentItem,
-      error: products.error,
-      loading: loading["post/READ_POST"],
-    })
-  );
+  const { product, error } = useSelector((state) => state.products);
+  const { currentItem } = useSelector((state) => state.basket);
+
+  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onOrder = (count) => {
+    dispatch(
+      setOrder({
+        order: {
+          item_name: product.name,
+          totalAmount: count,
+          totalPrice: product.price,
+          delivery: product.delivery,
+          products: [{ ...product, count: parseInt(count, 10) }],
+        },
+        list: null,
+      })
+    );
+    history.push("/order?once=true");
+  };
 
   useEffect(() => {
-    console.log(productId);
     dispatch(getProduct(productId));
     return () => {
       dispatch(unloadproduct());
+      dispatch(initialCurrent());
     };
   }, [dispatch, productId]);
 
-  const onAddBasket = (productId, count) => {
-    if (product.count < count) {
+  const onAddBasket = () => {
+    if (product.stock < count) {
       window.confirm("재고가 부족합니다");
     } else {
-      dispatch(addBasket({ productId, count }));
+      dispatch(addBasket({ productId: product.id, count }));
     }
   };
 
@@ -45,11 +59,17 @@ const ProductContainer = ({ productId }) => {
     }
   }, [dispatch, currentItem, productId]);
 
-  if (loading && !product) return <div>로딩중...</div>; // 로딩중이면서, 데이터가 없을 때에만 로딩중... 표시
   if (error) return <div>에러 발생!</div>;
   if (!product) return null;
 
-  return <Product product={product} onAddBasket={onAddBasket} />;
+  return (
+    <Product
+      product={product}
+      onAddBasket={onAddBasket}
+      onOrder={onOrder}
+      setCount={setCount}
+    />
+  );
 };
 
 export default ProductContainer;

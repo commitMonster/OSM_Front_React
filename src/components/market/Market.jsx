@@ -50,7 +50,7 @@ const orderByList = [
     title: "이름 순",
   },
   {
-    id: "count",
+    id: "stock",
     title: "재고 순",
   },
 ];

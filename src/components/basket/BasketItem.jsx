@@ -6,22 +6,27 @@ import {
   Grid,
   Typography,
   Checkbox,
+  IconButton,
+  TextField,
 } from "@material-ui/core";
+import ClearIcon from "@material-ui/icons/Clear";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const BasketItem = ({ product, onCkeckListChange }) => {
-  const price = product.price.toLocaleString("ko") + "원";
-  const image = product.image.slice(0, product.image.indexOf(","));
-  const [checked, setChecked] = useState(false);
+const BasketItem = ({ order, onDelete, onEdit }) => {
+  const price = order.product.price.toLocaleString("ko") + "원";
+  const totalPrice =
+    (order.product.price * order.count).toLocaleString("ko") + "원";
+  const deliveryPrice = order.product.delivery.toLocaleString("ko") + "원";
+  const image = order.product.image[0];
   const baseURL = "https://shop.dnatuna.fun/api/";
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
-
   return (
-    <Card
+    <Grid
+      item
+      container
+      xs={12}
+      component={Card}
       sx={{
         width: "100%",
         boxShadow: "2px 3px 10px 0px rgba(117,117,117,0.5)",
@@ -34,41 +39,79 @@ const BasketItem = ({ product, onCkeckListChange }) => {
       <CardMedia
         sx={{ width: 100, height: 100, backgroundSize: "cover" }}
         image={`${baseURL}${image}`}
-        title={product.name}
+        title={order.product.name}
       />
-      <CardContent
+      <Grid
+        item
+        container
+        component={CardContent}
+        alignItems="center"
         sx={{
           flex: "1",
         }}
       >
-        <Grid container>
-          <Grid item xs={9}>
-            <Link to={`/product/${product.id}`}>
-              <Typography
-                gutterBottom
-                sx={{
-                  fontSize: "1.1rem",
-                  margin: "0",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {product.name}
-              </Typography>
-            </Link>
+        <Grid item xs={5} alignItems="center">
+          <Link to={`/product/${order.product.id}`}>
+            <Typography
+              gutterBottom
+              sx={{
+                fontSize: "1.1rem",
+                margin: "0",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {order.product.name}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid container item xs={2} justifyContent="center">
+          <Grid item xs={8} textAlign="center">
+            <TextField
+              required
+              id="count"
+              name="count"
+              variant="standard"
+              label="수량"
+              value={order.count}
+              onChange={(e) =>
+                onEdit({
+                  id: order.id,
+                  productId: order.product.id,
+                  count: parseInt(e.target.value, 10),
+                })
+              }
+              size="small"
+              type="number"
+            />
           </Grid>
-          <Grid container item xs={2}>
-            <Typography component="p" align="right">
-              {price}
+          <Grid item xs={12} textAlign="center">
+            <Typography component="p" fontSize="0.8rem" sx={{ color: "gray" }}>
+              (재고:{order.product.stock})
             </Typography>
           </Grid>
-          <Grid container item xs={1}>
-            <Checkbox checked={checked} onChange={handleChange} />
+        </Grid>
+        <Grid container item xs={2} justifyContent="center">
+          <Grid item xs={12} textAlign="center">
+            <Typography component="p">{totalPrice}</Typography>
+          </Grid>
+          <Grid item xs={12} textAlign="center">
+            <Typography component="p" fontSize="0.8rem" sx={{ color: "gray" }}>
+              (개당:{price})
+            </Typography>
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+        <Grid container item xs={2} justifyContent="center">
+          <Typography component="p">배송비:{deliveryPrice}</Typography>
+        </Grid>
+        <Grid container item xs={1} justifyContent="center">
+          <IconButton onClick={() => onDelete(order.id)}>
+            <ClearIcon sx={{ color: "red" }} />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

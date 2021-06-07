@@ -1,12 +1,12 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 import AdminMainContainer from "../../container/admin/main/AdminMainContainer";
 
 const AdminMainPage = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayoutContainer>
       <AdminMainContainer />
-    </DashboardLayout>
+    </DashboardLayoutContainer>
   );
 };
 

@@ -39,6 +39,22 @@ const ProductListToolbarContainer = (props) => {
     window.scrollTo(0, 0);
   };
 
+  const onDeletedProduct = (isDeleted) => {
+    const query = qs.stringify({
+      ...params,
+      isDeleted: isDeleted,
+    });
+    history.push(`/admin/productList/?${query}`);
+  };
+
+  const onSearch = (q) => {
+    const query = qs.stringify({
+      ...params,
+      q: q,
+    });
+    history.push(`/admin/productList/?${query}`);
+  };
+
   useEffect(() => {
     dispatch(getProductList(params));
   }, [dispatch, location.search, success]);
@@ -47,8 +63,11 @@ const ProductListToolbarContainer = (props) => {
     <ProductListToolbar
       orderBy={params.orderBy || ""}
       sort={params.sort || "desc"}
+      query={params.q}
       onPriceChange={onPriceChange}
       onSortChange={onSortChange}
+      onDeletedProduct={onDeletedProduct}
+      onSearch={onSearch}
     />
   );
 };

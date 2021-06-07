@@ -9,6 +9,16 @@ import {
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import HeadingTitle from "../../common/HeadingTitle";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+
+const ShowImg = styled.img`
+  ${(props) =>
+    props.selected &&
+    css`
+      border: 2px solid rgb(67, 80, 165);
+    `}
+`;
 
 const Product = ({ product }) => {
   const price = product.price.toLocaleString("ko") + "원";
@@ -44,18 +54,11 @@ const Product = ({ product }) => {
               justifyContent="center"
             >
               {product.image.map((item, index) => (
-                <Grid
-                  item
-                  key={index}
-                  sx={
-                    showImg === item && {
-                      "& img": { border: "2px solid #3887A6" },
-                    }
-                  }
-                >
-                  <img
+                <Grid item key={index}>
+                  <ShowImg
                     src={`${baseURL}${item}`}
                     alt=""
+                    selected={showImg === `${baseURL}${item}`}
                     onMouseEnter={() => setShowImg(baseURL + item)}
                     style={{
                       width: "3rem",
@@ -118,7 +121,7 @@ const Product = ({ product }) => {
             </Grid>
             <Grid item xs={9} md={12}>
               <Typography variant="h4">가격 : {price}</Typography>
-              <Typography variant="P">남은 수량 : {product.count}</Typography>
+              <Typography variant="P">남은 수량 : {product.stock}</Typography>
             </Grid>
             <Grid item xs={9} md={12}>
               <Typography variant="P">

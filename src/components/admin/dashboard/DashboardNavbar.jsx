@@ -1,33 +1,19 @@
-import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  AppBar,
-  Badge,
-  Box,
-  Hidden,
-  IconButton,
-  Toolbar,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
+import { Link } from "react-router-dom";
+import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
 import InputIcon from "@material-ui/icons/Input";
 import Logo from "./Logo";
 
-const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
-  const [notifications] = useState([]);
-
+const DashboardNavbar = ({ onLogout }) => {
   return (
-    <AppBar elevation={0} {...rest}>
+    <AppBar elevation={0}>
       <Toolbar>
-        <RouterLink to="/admin">
+        <Link to="/admin">
           <Logo />
-        </RouterLink>
+        </Link>
         <Box sx={{ flexGrow: 1 }} />
-        <RouterLink to="/admin">
-          <IconButton color="">
-            <InputIcon />
-          </IconButton>
-        </RouterLink>
+        <IconButton onClick={onLogout}>
+          <InputIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );

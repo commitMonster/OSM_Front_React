@@ -12,12 +12,14 @@ const [CREATE_IMAGES, CREATE_IMAGES_SUCCESS, CREATE_IMAGES_FAILURE] =
   createRequestActionTypes("images/CREATE_IMAGES");
 const DELETE_IMAGE = "images/DELETE_IMAGE";
 const SET_IMAGES = "images/SET_IMAGES";
+const INITAILIZE = "images/INITAILIZE";
 
 /**액션 생성 함수 */
 export const getImage = createAction(GET_IMAGE, (name) => name);
 export const createImages = createAction(CREATE_IMAGES, (name) => name);
 export const deleteImage = createAction(DELETE_IMAGE, (name) => name);
 export const setImage = createAction(SET_IMAGES, (images) => images);
+export const initialize = createAction(INITAILIZE);
 
 /**사가 */
 function* getImageSaga(action) {
@@ -73,6 +75,7 @@ export default handleActions(
       ...state,
       images,
     }),
+    [INITAILIZE]: (state) => initialState,
   },
   initialState
 );

@@ -1,12 +1,12 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
 import BannerContainer from "../../container/admin/banner/BannerContainer";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 
 function BannerPage({ match }) {
   return (
-    <DashboardLayout>
+    <DashboardLayoutContainer>
       <BannerContainer id={match.params.id} />
-    </DashboardLayout>
+    </DashboardLayoutContainer>
   );
 }
 

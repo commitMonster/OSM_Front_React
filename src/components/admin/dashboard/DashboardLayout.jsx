@@ -31,10 +31,10 @@ const DashboardLayoutContent = experimentalStyled("div")({
   overflow: "auto",
 });
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({ children, onLogout }) => {
   return (
     <DashboardLayoutRoot>
-      <DashboardNavbar />
+      <DashboardNavbar onLogout={onLogout} />
       <DashboardSidebar />
       <DashboardLayoutWrapper>
         <DashboardLayoutContainer>

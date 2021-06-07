@@ -5,11 +5,18 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Avatar, Container, TextField, useMediaQuery } from "@material-ui/core";
+import {
+  Avatar,
+  Container,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initialUser, signout } from "../../modules/user";
 import { useRef, memo, useState } from "react";
+import PersonIcon from "@material-ui/icons/Person";
 
 const sections = [
   { title: "Market", url: "market" },
@@ -57,7 +64,7 @@ function Header({ user, count, onSearch, query }) {
               `
             }
           >
-            <Avatar src="https://i.postimg.cc/QdNLR1CX/logo-fullsize.png" />
+            <Avatar src="https://i.postimg.cc/XqzJ7tNw/14x14-mm-x.jpg" />
           </Link>
           {!isMobile && (
             <Link
@@ -69,11 +76,17 @@ function Header({ user, count, onSearch, query }) {
                 marginTop: "0.5rem",
               }}
             >
-              <img
-                src="https://i.postimg.cc/zfDxr1p3/2021-05-01-10-05-53.png"
-                alt="logo"
-                style={{ width: "6rem" }}
-              />
+              <Typography
+                variant="h1"
+                sx={{
+                  marginLeft: "0.5rem",
+                  fontSize: "1.8rem",
+                  fontWeight: "400",
+                  color: "#3DA61F",
+                }}
+              >
+                EC Mall
+              </Typography>
             </Link>
           )}
 
@@ -85,15 +98,22 @@ function Header({ user, count, onSearch, query }) {
             onChange={onQueryChange}
             onKeyPress={onKeyPress}
           />
-          <IconButton>
-            <SearchIcon onClick={handleSearch} />
+          <IconButton onClick={handleSearch}>
+            <SearchIcon />
           </IconButton>
-          <IconButton>
-            <ShoppingCartIcon
-              onClick={() => {
-                history.push("/basket");
-              }}
-            />
+          <IconButton
+            onClick={() => {
+              history.push("/mypage/orderHistory");
+            }}
+          >
+            <PersonIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              history.push("/basket");
+            }}
+          >
+            <ShoppingCartIcon />
           </IconButton>
           <Avatar
             sx={{

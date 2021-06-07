@@ -1,13 +1,13 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 import ProductContainer from "../../container/admin/product/ProductContainer";
 
 const ProductPage = ({ match }) => {
   const { id } = match.params;
   return (
-    <DashboardLayout>
+    <DashboardLayoutContainer>
       <ProductContainer productId={parseInt(id, 10)} />
-    </DashboardLayout>
+    </DashboardLayoutContainer>
   );
 };
 

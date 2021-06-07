@@ -96,7 +96,7 @@ const ProductListTable = ({
               <Link to="/admin/editProduct">물품 추가</Link>
             </Button>
           </Box>
-          <Table>
+          <Table sx={{ ".MuiTableCell-root": { textAlign: "center" } }}>
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
@@ -158,23 +158,23 @@ const ProductListTable = ({
                   <TableCell>{product.price}</TableCell>
                   <TableCell>{product.delivery}</TableCell>
                   <TableCell>{product.score}</TableCell>
-                  <TableCell>{product.count}</TableCell>
+                  <TableCell>{product.stock}</TableCell>
                   <TableCell>
-                    <button
+                    <Button
                       onClick={() => {
                         onEdit(product);
                       }}
                     >
                       수정
-                    </button>
+                    </Button>
                     <span> / </span>
-                    <button
+                    <Button
                       onClick={() => {
                         onDelete(product.id);
                       }}
                     >
                       삭제
-                    </button>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

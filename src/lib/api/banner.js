@@ -2,18 +2,17 @@ import axios from "axios";
 import qs from "qs";
 
 export const getBannerList = async ({
-  orderBy = "",
+  type = "",
   sort = "",
   start = "",
   end = "",
 }) => {
   const queryString = qs.stringify({
-    orderBy,
+    type,
     sort,
     start,
     end,
   });
-  console.log(`/api/banner?${queryString}`);
   const response = await axios({
     method: "get",
     url: `/api/banner?${queryString}`,
@@ -70,10 +69,10 @@ export const updateBanner = async ({
   return response;
 };
 
-export const activateBanner = async ({ id, activation }) => {
+export const activateBanner = async ({ bannerId, activation }) => {
   const resposne = await axios({
     method: "patch",
-    url: `/api/banner/${id}/activate`,
+    url: `/api/banner/${bannerId}/activate`,
     data: {
       activation,
     },

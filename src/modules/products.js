@@ -16,12 +16,18 @@ const [
   GET_NEW_PRODUCT_LIST_SUCCESS,
   GET_NEW_PRODUCT_LIST_FAILURE,
 ] = createRequestActionTypes("products/GET_NEW_PRODUCT_LIST");
+const [
+  GET_POPULAR_PRODUCT_LIST,
+  GET_POPULAR_PRODUCT_LIST_SUCCESS,
+  GET_POPULAR_PRODUCT_LIST_FAILURE,
+] = createRequestActionTypes("products/GET_POPULAR_PRODUCT_LIST");
 const UNLOAD_PRODUCT = "product/UNLOAD_PRODUCT";
 
 export const getProduct = createAction(GET_PRODUCT, (id) => id);
 export const getProductList = createAction(GET_PRODUCT_LIST, (body) => body);
 export const deleteProduct = createAction(DELETE_PRODUCT, (id) => id);
 export const getNewProductList = createAction(GET_NEW_PRODUCT_LIST);
+export const getPopularProductList = createAction(GET_POPULAR_PRODUCT_LIST);
 export const unloadproduct = createAction(UNLOAD_PRODUCT);
 
 const getProductSaga = createRequestSaga(
@@ -40,18 +46,24 @@ const getNewProductListSaga = createRequestSaga(
   GET_NEW_PRODUCT_LIST,
   productsAPI.getNewProductList
 );
+const getPopularProductListSaga = createRequestSaga(
+  GET_POPULAR_PRODUCT_LIST,
+  productsAPI.getPopularProductList
+);
 
 export function* productsSaga() {
   yield takeLatest(GET_PRODUCT, getProductSaga);
   yield takeLatest(GET_PRODUCT_LIST, getProductListSaga);
   yield takeLatest(DELETE_PRODUCT, deleteProductSaga);
   yield takeLatest(GET_NEW_PRODUCT_LIST, getNewProductListSaga);
+  yield takeLatest(GET_POPULAR_PRODUCT_LIST, getPopularProductListSaga);
 }
 
 const initialState = {
   product: null,
   products: null,
   newProducts: null,
+  popularProducts: null,
   success: null,
   error: null,
   itemCount: 0,
@@ -81,6 +93,17 @@ const products = handleActions(
       newProducts: newProducts,
     }),
     [GET_NEW_PRODUCT_LIST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error: error,
+    }),
+    [GET_POPULAR_PRODUCT_LIST_SUCCESS]: (
+      state,
+      { payload: popularProducts }
+    ) => ({
+      ...state,
+      popularProducts: popularProducts,
+    }),
+    [GET_POPULAR_PRODUCT_LIST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error: error,
     }),

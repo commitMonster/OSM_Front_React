@@ -35,7 +35,7 @@ export const getProductList = async ({
 export const createProduct = async ({
   name,
   description,
-  count,
+  stock,
   price,
   image,
   delivery,
@@ -47,7 +47,7 @@ export const createProduct = async ({
     data: {
       name: name,
       description: description,
-      count: count,
+      stock: stock,
       price: price,
       image: image,
       delivery: delivery,
@@ -69,7 +69,7 @@ export const updateProduct = async ({
   id,
   name,
   description,
-  count,
+  stock,
   price,
   image,
   delivery,
@@ -81,7 +81,7 @@ export const updateProduct = async ({
     data: {
       name: name,
       description: description,
-      count: count,
+      stock: stock,
       price: price,
       image: image,
       delivery: delivery,
@@ -103,6 +103,13 @@ export const getNewProductList = async () => {
   const response = await axios({
     method: "get",
     url: "/api/product/new",
+  });
+  return response;
+};
+export const getPopularProductList = async () => {
+  const response = await axios({
+    method: "get",
+    url: "/api/product/popular",
   });
   return response;
 };

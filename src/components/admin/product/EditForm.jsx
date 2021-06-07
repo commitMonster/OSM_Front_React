@@ -51,14 +51,14 @@ const EditForm = ({ product, onChangeField }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="count"
-            name="count"
+            id="stock"
+            name="stock"
             label="재고"
-            value={product.count}
+            value={product.stock}
             onChange={(e) =>
               onChangeField({
                 mode: "product",
-                key: "count",
+                key: "stock",
                 value: parseInt(e.target.value, 10),
               })
             }

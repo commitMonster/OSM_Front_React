@@ -5,6 +5,7 @@ import {
   Divider,
   Grid,
   Input,
+  Modal,
   Rating,
   TextField,
   Typography,
@@ -13,12 +14,12 @@ import {
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import React, { useReducer, useRef, useState } from "react";
-import Header from "../common/Header";
-import Footer from "../common/Footer";
-import StarRatings from "react-star-ratings";
 import { Helmet } from "react-helmet-async";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import CustomButton from "../common/CustomButton";
+import CustomModal from "../common/CustomModal";
+import AddressContainer from "../../container/common/AddressContainer";
 
 const ShowImg = styled.img`
   ${(props) =>
@@ -28,11 +29,12 @@ const ShowImg = styled.img`
     `}
 `;
 
-const Product = ({ product, onAddBasket }) => {
+const Product = ({ product, onAddBasket, onOrder }) => {
   const price = product.price.toLocaleString("ko") + "원";
   const baseURL = "https://shop.dnatuna.fun/api/";
 
   const [showImg, setShowImg] = useState(baseURL + product.image[0]);
+  const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 568px)");
   const isRow = useMediaQuery("(max-width: 959px)");
   const countRef = useRef();
@@ -44,8 +46,16 @@ const Product = ({ product, onAddBasket }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <title>EC몰 | {product.name}</title>
+        <title>EC Mall | {product.name}</title>
       </Helmet>
+      <CustomModal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <AddressContainer setOpen={setOpen} />
+      </CustomModal>
       <Container maxWidth="lg">
         <Grid container spacing={4} pt={2}>
           <Grid
@@ -146,9 +156,21 @@ const Product = ({ product, onAddBasket }) => {
                 <Divider />
               </Grid>
             </Grid>
-            <Grid item xs={9} md={12}>
+            <Grid item xs={9} md={9}>
               <Typography variant="h4">가격 : {price}</Typography>
-              <Typography variant="P">남은 수량 : {product.count}</Typography>
+              <Typography variant="P">남은 수량 : {product.stock}</Typography>
+            </Grid>
+            <Grid item xs={3} md={3}>
+              <CustomButton
+                fullWidth
+                disableElevation
+                variant="contained"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
+                배송지 선택
+              </CustomButton>
             </Grid>
             <Grid item xs={9} md={12}>
               <Typography variant="P">
@@ -169,25 +191,26 @@ const Product = ({ product, onAddBasket }) => {
               />
             </Grid>
             <Grid item xs={6} md={5}>
-              <Button
+              <CustomButton
                 fullWidth
                 variant="outlined"
                 disableElevation
-                sx={{ color: "#1B7EA6" }}
                 onClick={handelAddBasket}
               >
                 장바구니에 넣기
-              </Button>
+              </CustomButton>
             </Grid>
             <Grid item xs={6} md={5}>
-              <Button
+              <CustomButton
                 fullWidth
                 variant="contained"
                 disableElevation
-                sx={{ color: "white", backgroundColor: "#1B7EA6" }}
+                onClick={() => {
+                  onOrder(countRef.current.value);
+                }}
               >
                 구매 하기
-              </Button>
+              </CustomButton>
             </Grid>
           </Grid>
         </Grid>

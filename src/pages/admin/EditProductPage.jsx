@@ -1,12 +1,12 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 import EditProductContainer from "../../container/admin/product/EditProductContainer";
 
 const EditProductPage = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayoutContainer>
       <EditProductContainer />
-    </DashboardLayout>
+    </DashboardLayoutContainer>
   );
 };
 

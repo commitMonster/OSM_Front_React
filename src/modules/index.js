@@ -8,6 +8,8 @@ import { all } from "redux-saga/effects";
 import banners, { bannersSaga } from "./banners";
 import images, { imagesSaga } from "./images";
 import write, { writeSaga } from "./write";
+import order, { orderSaga } from "./order";
+import destination, { destinationSaga } from "./destination";
 
 const rootReducer = combineReducers({
   products,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   images,
   loading,
   write,
+  order,
+  destination,
 });
 export function* rootSaga() {
   yield all([
@@ -28,6 +32,8 @@ export function* rootSaga() {
     basketSaga(),
     imagesSaga(),
     writeSaga(),
+    orderSaga(),
+    destinationSaga(),
   ]);
 }
 

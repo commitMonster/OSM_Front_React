@@ -40,35 +40,10 @@ const Footer = () => {
             </Link>
           ))}
         </Toolbar>
-        <Grid container justifyContent="center" sx={{ margin: "2rem 0" }}>
-          <Grid container item xs={12} md={1} justifyContent="center">
-            <img
-              src="https://i.postimg.cc/g0Hz53j3/2021-05-01-10-35-36.png"
-              alt="logo"
-              style={{ width: "6rem", height: "6rem" }}
-            />
-          </Grid>
-          <Grid
-            container
-            item
-            xs={12}
-            md={4}
-            flexDirection="column"
-            justifyContent="center"
-            mr={5}
-            ml={5}
-          >
-            <Typography>
-              Hippy는  non-fungible tokens (NFT)을 이용한 디지털 예술가들이
-              안전하게 창작물을 거래할 수 있는 플랫폼입니다. 디지털 작품들을
-              안전하게 사고 팔고 소유하세요
-            </Typography>
-          </Grid>
-        </Grid>
         <Typography variant="body2" color="text.secondary" align="center">
           {"Copyright © "}
           <Link color="inherit" href="https://material-ui.com/">
-            Hippy
+            EC Mall
           </Link>{" "}
           {new Date().getFullYear()}
           {"."}

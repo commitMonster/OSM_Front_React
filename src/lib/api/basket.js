@@ -13,6 +13,18 @@ export const addBasket = async ({ productId, count }) => {
   return response;
 };
 
+export const onceBasket = async ({ productId, count }) => {
+  const response = await axios({
+    method: "post",
+    url: "/api/basket/once",
+    data: {
+      productId,
+      count,
+    },
+  });
+  return response;
+};
+
 export const getBasket = async () => {
   const response = await axios({
     method: "get",

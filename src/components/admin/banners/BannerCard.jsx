@@ -1,52 +1,33 @@
 import react, { useState } from "react";
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import GetAppIcon from "@material-ui/icons/GetApp";
 
-const BannerCard = ({ banner, onDeleteHandler, onActivityHandler }) => {
+const BannerCard = ({ banner, onEdit, onDelete, onActivate }) => {
   const [activityState, setActivityState] = useState(null);
   const baseURL = "https://shop.dnatuna.fun/api/";
+
   return (
-    <Box
-      borderBottom={1}
+    <Grid
+      item
+      container
+      xs={12}
+      mt={2}
+      alignItems="center"
       sx={{
-        display: "flex",
-        flexDirection: "Row",
-        justifyContent: "space-around",
-        minWidth: "10rem",
-        height: "100%",
-        oxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-        m: 1,
+        boxShadow: "5px 5px 10px 1px rgba(125,125,125,0.31)",
       }}
     >
-      <Box
-        sx={{
-          flex: 1,
-          justifyContent: "start",
-          align: "center",
-          p: 3,
-          m: 3,
-        }}
-      >
+      <Grid item xs={4}>
         <img
-          style={{ width: "300px", height: "200px" }}
+          style={{ width: "100%", height: "100%" }}
           alt="Product"
           src={`${baseURL}${banner.image[0]}`}
           variant="square"
         />
-      </Box>
-      <Link to={`/admin/banner/${banner.id}`}>
-        <Box sx={{ flex: 3, p: 5 }}>
+      </Grid>
+      <Grid item xs={5} p={2}>
+        <Link to={`/admin/banner/${banner.id}`}>
           <Typography
             align="start"
             color="textPrimary"
@@ -64,75 +45,19 @@ const BannerCard = ({ banner, onDeleteHandler, onActivityHandler }) => {
           ) : (
             <Typography style={{ color: "blue" }}>비활성화 상태</Typography>
           )}
-        </Box>
-      </Link>
-      <Box sx={{ flex: 1, p: 5, flexDirection: "row", align: "center" }}>
-        {/* 수정 구현하기 */}
-        <Box sx={{ p: 3 }}>
-          <button onClick={() => onDeleteHandler(banner.id)}>삭제</button>
-          <span> / </span>
-          {/* 삭제 구현하기 */}
-          <Link
-            to={`/admin/banner/updatebanner/${banner.id}`}
-            style={{ marginRight: "20px" }}
-          >
-            수정
-          </Link>
-          <button
-            onClick={() =>
-              onActivityHandler(banner.id, { activation: !banner.activation })
-            }
-          >
-            활성화
-          </button>
-        </Box>
-      </Box>
-
-      {/* <Box sx={{ p: 2 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ justifyContent: 'space-between' }}
-      >
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <AccessTimeIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            Updated 2hr ago
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <GetAppIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            {banner.totalDownloads}
-            {' '}
-            Downloads
-          </Typography>
-        </Grid>
+        </Link>
       </Grid>
-    </Box> */}
-    </Box>
+
+      <Grid item container xs={3} justifyContent="center" alignItems="center">
+        <Button onClick={() => onEdit(banner)}>수정</Button>
+        <span> / </span>
+        <Button onClick={() => onDelete(banner.id)}>삭제</Button>
+        <span> / </span>
+        <Button onClick={() => onActivate(banner.id, !banner.activation)}>
+          {banner.activation ? "비활성화" : "활성화"}
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 

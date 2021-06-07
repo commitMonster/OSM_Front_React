@@ -1,12 +1,12 @@
 import React from "react";
-import DashboardLayout from "../../components/admin/dashboard/DashboardLayout";
 import UpdateBannerContainer from "../../container/admin/banner/UpdateBannerContainer";
+import DashboardLayoutContainer from "../../container/admin/dashboard/DashboardLayoutContainer";
 
 function UpdateBannerPage({ match }) {
   return (
-    <DashboardLayout>
+    <DashboardLayoutContainer>
       <UpdateBannerContainer id={match.params.id} />
-    </DashboardLayout>
+    </DashboardLayoutContainer>
   );
 }
 

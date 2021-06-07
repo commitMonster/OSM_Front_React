@@ -119,7 +119,7 @@ const Preview = ({ product, images }) => {
           </Grid>
           <Grid item xs={9}>
             <Typography variant="h4">가격 : {price}</Typography>
-            <Typography variant="P">남은 수량 : {product.count}</Typography>
+            <Typography variant="P">남은 수량 : {product.stock}</Typography>
           </Grid>
           <Grid item xs={9}>
             <Typography variant="P">
