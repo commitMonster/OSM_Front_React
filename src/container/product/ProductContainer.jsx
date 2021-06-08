@@ -43,7 +43,9 @@ const ProductContainer = ({ productId }) => {
     if (product.stock < count) {
       window.confirm("재고가 부족합니다");
     } else {
-      dispatch(addBasket({ productId: product.id, count }));
+      dispatch(
+        addBasket({ productId: product.id, count: parseInt(count, 10) })
+      );
     }
   };
 

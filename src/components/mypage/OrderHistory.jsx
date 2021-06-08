@@ -12,9 +12,9 @@ const stateReduce = (state) => {
     case "shipping":
       return "배송 진행중입니다.";
     case "shipped":
-      return "구매 확정";
+      return "배송 완료 & 구매 확정하기";
     case "complete":
-      return "주문이 완료되었습니다.";
+      return "구매가 확정되었습니다.";
     default:
       return "";
   }
@@ -61,6 +61,9 @@ const OrderCard = ({ order, onManage }) => {
   if (!order.destination) return null;
   return (
     <Grid item container xs={12} component={Card} mb={2} mr={4} p={2}>
+      <Helmet>
+        <title>EC Mall | 주문내역</title>
+      </Helmet>
       <Grid
         item
         container
@@ -101,9 +104,23 @@ const OrderCard = ({ order, onManage }) => {
             {stateReduce(order.state)}
           </Button>
         </Grid>
+        {(order.state === "wait" || order.state === "shipping") && (
+          <Grid item xs={2} pl={4}>
+            <Button fullWidth variant="contained">
+              문의하기
+            </Button>
+          </Grid>
+        )}
+        {order.state === "complete" && (
+          <Grid item xs={2} pl={4}>
+            <Button fullWidth variant="contained">
+              상품평
+            </Button>
+          </Grid>
+        )}
         <Grid
           item
-          xs={8}
+          xs={6}
           sx={{ fontSize: "1.5rem", fontweight: "bold", textAlign: "right" }}
         >
           총 가격 : {order.total + order.delivery}

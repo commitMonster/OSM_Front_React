@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, withRouter } from "react-router";
+import { useLocation } from "react-router";
 import OrderSuccess from "../../components/order/OrderSuccess";
-import { addBasket, getBasketList, onceBasket } from "../../modules/basket";
+import { onceBasket } from "../../modules/basket";
 import { createOrder, initialize } from "../../modules/order";
 import qs from "qs";
+import { check } from "../../modules/user";
 
 const OrderSuccessContainer = () => {
   const {
@@ -46,7 +47,6 @@ const OrderSuccessContainer = () => {
           list,
         })
       );
-      dispatch(getBasketList());
     }
     return () => {
       dispatch(initialize());
@@ -70,7 +70,7 @@ const OrderSuccessContainer = () => {
 
   useEffect(() => {
     if (orderLoading && orderSuccess) {
-      dispatch(getBasketList());
+      dispatch(check());
     }
   }, [orderSuccess]);
 

@@ -26,7 +26,6 @@ const AddressItem = ({
         borderBottom: "1px solid #338C1B",
         cursor: "pointer",
         color: "black",
-        display: "flex",
         "&:hover": {
           backgroundColor: "#F2F2F2",
         },
@@ -105,16 +104,25 @@ const AddressList = ({
 }) => {
   return (
     <Grid container p={2}>
-      <Grid item container xs={12} sx={{ height: "430px", overflow: "auto" }}>
+      <Grid
+        item
+        container
+        xs={12}
+        flexDirection="column"
+        sx={{ height: "430px", overflow: "auto" }}
+      >
         <Grid
           item
-          xs={12}
           p={1}
-          sx={{ height: "fit-content", backgroundColor: "#338C1B" }}
+          sx={{
+            width: "100%",
+            height: "fit-content",
+            backgroundColor: "#338C1B",
+          }}
         >
           <Typography sx={{ color: "white" }}>기본 배송지</Typography>
         </Grid>
-        <Grid item container xs={12}>
+        <Grid item container>
           {destinations.map((destination) => {
             if (destination.isDefault)
               return (
@@ -131,13 +139,16 @@ const AddressList = ({
         </Grid>
         <Grid
           item
-          xs={12}
           p={1}
-          sx={{ height: "fit-content", backgroundColor: "#338C1B" }}
+          sx={{
+            height: "fit-content",
+            width: "100%",
+            backgroundColor: "#338C1B",
+          }}
         >
           <Typography sx={{ color: "white" }}>배송지 목록</Typography>
         </Grid>
-        <Grid item container xs={12}>
+        <Grid item container>
           {destinations.map((destination) => {
             if (!destination.isDefault)
               return (
@@ -154,7 +165,7 @@ const AddressList = ({
         </Grid>
       </Grid>
 
-      <Grid item xs={12} mt={2}>
+      <Grid item mt={2}>
         <CustomButton fullWidth onClick={() => setMode("create")}>
           배송지 추가
         </CustomButton>

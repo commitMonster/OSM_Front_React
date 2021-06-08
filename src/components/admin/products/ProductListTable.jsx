@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const categoryIdReduce = (id) => {
@@ -78,6 +79,9 @@ const ProductListTable = ({
 
   return (
     <>
+      <Helmet>
+        <title>EC Mall 관리페이지 | 상품목록</title>
+      </Helmet>
       <Box
         sx={{
           m: 2,

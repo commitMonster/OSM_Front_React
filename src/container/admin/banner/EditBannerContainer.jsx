@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import EditBanner from "../../../components/admin/banner/EditBanner";
+import { getBannerList } from "../../../modules/banners";
 import {
   createImages,
   deleteImage,
@@ -16,10 +17,11 @@ import {
 } from "../../../modules/write";
 
 const EditBannerContainer = () => {
-  const { banner } = useSelector((state) => state.write);
+  const { banner, success } = useSelector((state) => state.write);
   const { images } = useSelector((state) => state.images);
   const [pictures, setPictures] = useState([]);
-  const [imgaeLoading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [imgaeLoading, setImgaeLoading] = useState(false);
   const [beforeImages, setBeforeImages] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const EditBannerContainer = () => {
           -1
       );
       dispatch(setImage(images.concat(tempImages)));
-      setLoading(false);
+      setImgaeLoading(false);
     }
   }, [images]);
 
@@ -57,16 +59,19 @@ const EditBannerContainer = () => {
   const onDataChange = (date) => {
     console.log(date);
     if (!date[0] || !date[1]) return;
+
     const start = `${date[0].getFullYear()}-${
       date[0].getMonth() + 1 < 10
         ? `0${date[0].getMonth() + 1}`
         : date[0].getMonth() + 1
     }-${date[0].getDate() < 10 ? `0${date[0].getDate()}` : date[0].getDate()}`;
+
     const end = `${date[1].getFullYear()}-${
       date[1].getMonth() + 1 < 10
         ? `0${date[1].getMonth() + 1}`
         : date[1].getMonth() + 1
-    }-${date[0].getDate() < 10 ? `0${date[0].getDate()}` : date[0].getDate()}`;
+    }-${date[1].getDate() < 10 ? `0${date[1].getDate()}` : date[1].getDate()}`;
+
     dispatch(changeField({ mode: "banner", key: "startDate", value: start }));
     dispatch(changeField({ mode: "banner", key: "endDate", value: end }));
   };
@@ -78,7 +83,7 @@ const EditBannerContainer = () => {
       formData.append("files", file[i]);
     }
     dispatch(createImages(formData));
-    setLoading(true);
+    setImgaeLoading(true);
   };
 
   const onPublish = () => {
@@ -86,6 +91,7 @@ const EditBannerContainer = () => {
     //   dispatch(deleteImage(item));
     // });
     if (banner.originalId) {
+      setLoading(true);
       dispatch(
         updateBanner({
           ...banner,
@@ -93,14 +99,21 @@ const EditBannerContainer = () => {
           id: banner.originalId,
         })
       );
-      history.push("/admin/bannerList");
       return;
     } else {
+      setLoading(true);
       dispatch(createBanner({ ...banner, image: images.join(",") }));
-      history.push("/admin/bannerList");
       return;
     }
   };
+
+  useEffect(() => {
+    if (loading && success) {
+      setLoading(false);
+      dispatch(getBannerList({}));
+      history.push("/admin/bannerList");
+    }
+  }, [success]);
 
   return (
     <EditBanner

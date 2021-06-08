@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import EditForm from "./EditForm";
 import UploadImageForm from "./UploadImageForm";
 import Preview from "./Preview";
+import { Helmet } from "react-helmet-async";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +58,14 @@ const EditProduct = ({
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
+    if (activeStep === 0 && [product.name, product.description].includes("")) {
+      alert("모든 정보를 입력해주세요");
+      return activeStep;
+    }
+    if (activeStep === 1 && images.length === 0) {
+      alert("최소 한개의 이미지를 등록해주세요");
+      return activeStep;
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -86,6 +95,9 @@ const EditProduct = ({
   const history = useHistory();
   return (
     <React.Fragment>
+      <Helmet>
+        <title>EC Mall 관리페이지 | 상품 등록</title>
+      </Helmet>
       <Container component="main" className={classes.main} maxWidth="sm">
         <Paper className={classes.paper} variant="outlined">
           <Typography component="h1" variant="h4" align="center">

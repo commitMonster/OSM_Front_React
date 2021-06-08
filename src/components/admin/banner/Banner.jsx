@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import "react-slideshow-image/dist/styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { DateChange } from "../../../lib/utils/dateChange";
+import { Helmet } from "react-helmet-async";
 
 const Banner = ({ banner }) => {
   const baseURL = "https://shop.dnatuna.fun/api/";
@@ -23,6 +24,9 @@ const Banner = ({ banner }) => {
         py: 3,
       }}
     >
+      <Helmet>
+        <title>EC Mall 관리페이지 | 공지 / 이벤트 관리</title>
+      </Helmet>
       <Container maxWidth={false}>
         <Box sx={{ pt: 3 }}>
           <TitleStyle>배너 상세정보 </TitleStyle>

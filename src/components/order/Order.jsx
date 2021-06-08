@@ -16,6 +16,7 @@ import React, { useState } from "react";
 import AddressContainer from "../../container/common/AddressContainer";
 import CustomButton from "../common/CustomButton";
 import CustomModal from "../common/CustomModal";
+import { Helmet } from "react-helmet-async";
 
 const baseURL = "https://shop.dnatuna.fun/api/";
 
@@ -65,6 +66,9 @@ const Order = ({ order, onClickPayment, destination }) => {
 
   return (
     <Container maxWidth="md">
+      <Helmet>
+        <title>EC Mall | 주문서</title>
+      </Helmet>
       <CustomModal
         open={open}
         onClose={() => {

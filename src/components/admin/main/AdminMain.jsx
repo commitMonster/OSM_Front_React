@@ -12,7 +12,7 @@ import LatestOrders from "./LatestOrders";
 const AdminMain = () => (
   <>
     <Helmet>
-      <title>EC Admin</title>
+      <title>EC Mall 관리페이지</title>
     </Helmet>
     <Container maxWidth={false}>
       <Grid container spacing={3}>

@@ -23,21 +23,25 @@ const AddressEdit = ({
   currentDestination,
 }) => {
   const [destinationName, setDestinationName] = useState(
-    currentDestination.destinationName || ""
+    (currentDestination && currentDestination.destinationName) || ""
   );
-  const [receiver, setReceiver] = useState(currentDestination.receiver || "");
+  const [receiver, setReceiver] = useState(
+    (currentDestination && currentDestination.receiver) || ""
+  );
   const [mainAddress, setMainAddress] = useState(
-    currentDestination.mainAddress || ""
+    (currentDestination && currentDestination.mainAddress) || ""
   );
   const [detailAddress, setDetailAddress] = useState(
-    currentDestination.detailAddress || ""
+    (currentDestination && currentDestination.detailAddress) || ""
   );
   const [zoneNumber, setZoneNumber] = useState(
-    currentDestination.zoneNumber || ""
+    (currentDestination && currentDestination.zoneNumber) || ""
   );
-  const [phone, setPhone] = useState(currentDestination.phone || "");
+  const [phone, setPhone] = useState(
+    (currentDestination && currentDestination.phone) || ""
+  );
   const [isDefault, setIsDefault] = useState(
-    currentDestination.isDefault || false
+    (currentDestination && currentDestination.isDefault) || false
   );
 
   const [open, setOpen] = useState(false);

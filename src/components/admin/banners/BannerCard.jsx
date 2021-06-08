@@ -2,6 +2,7 @@ import react, { useState } from "react";
 import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
+import { DateChange } from "../../../lib/utils/dateChange";
 
 const BannerCard = ({ banner, onEdit, onDelete, onActivate }) => {
   const [activityState, setActivityState] = useState(null);
@@ -32,13 +33,22 @@ const BannerCard = ({ banner, onEdit, onDelete, onActivate }) => {
             align="start"
             color="textPrimary"
             gutterBottom
-            variant="h4"
+            variant="h5"
           >
             {banner.title}
           </Typography>
 
-          <Typography align="start" color="textPrimary" variant="body1">
+          <Typography align="start" color="textPrimary" variant="body1" mb={2}>
             {banner.description}
+          </Typography>
+          <Typography
+            align="start"
+            color="textPrimary"
+            variant="body1"
+            sx={{ color: "gray" }}
+          >
+            기간 :{" "}
+            {DateChange(banner.startDate) + " ~ " + DateChange(banner.endDate)}
           </Typography>
           {banner.activation ? (
             <Typography style={{ color: "red" }}>활성화 상태</Typography>

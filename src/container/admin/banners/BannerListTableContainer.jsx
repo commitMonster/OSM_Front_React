@@ -14,6 +14,7 @@ import qs from "qs";
 const BannerListTableContainer = () => {
   const { banners, success } = useSelector((state) => state.banners);
   const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -27,12 +28,13 @@ const BannerListTableContainer = () => {
   };
 
   const onDelete = (bannerId) => {
+    setLoading(true);
     dispatch(deleteBanner(bannerId));
   };
 
   const onActivate = (bannerId, activation) => {
-    dispatch(activateBanner({ bannerId, activation }));
     setLoading(true);
+    dispatch(activateBanner({ bannerId, activation }));
   };
 
   useEffect(() => {

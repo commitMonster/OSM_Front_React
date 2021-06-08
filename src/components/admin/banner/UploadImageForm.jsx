@@ -45,7 +45,7 @@ const UploadImageForm = ({ images, uploadImage, imgaeLoading }) => {
               withPreview={true}
               withIcon={true}
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+              imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
               maxFileSize={10242880}
               buttonText="이미지 업로드"
               buttonStyles={{

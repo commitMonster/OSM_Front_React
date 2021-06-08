@@ -178,8 +178,10 @@ const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
                 fullWidth
                 label="수량(개)"
                 autoFocus
-                defaultValue={count}
-                onChange={setCount}
+                value={count}
+                onChange={(e) => {
+                  setCount(e.target.value);
+                }}
                 size="small"
                 required
                 InputProps={{ inputProps: { min: 1 } }}

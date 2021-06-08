@@ -7,7 +7,7 @@ const BannerListTable = ({ bannerlist, onEdit, onDelete, onActivate }) => {
   return (
     <>
       <Helmet>
-        <title>공지 / 이벤트</title>
+        <title>EC Mall 관리페이지 | 공지 / 이벤트 관리</title>
       </Helmet>
       <Grid container xs={12} sx={{ minWidth: 1050 }}>
         <Grid

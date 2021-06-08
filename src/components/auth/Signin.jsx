@@ -13,30 +13,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useRef } from "react";
-import { useHistory } from "react-router";
 import { Link as LinkRoute } from "react-router-dom";
-import GoogleLogin from "react-google-login";
 import { Helmet } from "react-helmet-async";
+import CustomButton from "../common/CustomButton";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-export default function Signin({ onLogin, onOauthKakao, onOauthGoogle }) {
+export default function Signin({ onLogin, error }) {
   const idRef = useRef();
   const pwdRef = useRef();
 
@@ -47,19 +28,10 @@ export default function Signin({ onLogin, onOauthKakao, onOauthGoogle }) {
     onLogin({ userId, password });
   };
 
-  const handleOauthKakao = (e) => {
-    e.preventDefault();
-    onOauthKakao();
-  };
-
-  const handleOauthGoogle = (result) => {
-    onOauthGoogle(result);
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <Helmet>
-        <title>EC몰 | 로그인</title>
+        <title>EC Mall | 로그인</title>
       </Helmet>
       <Box
         sx={{
@@ -69,7 +41,7 @@ export default function Signin({ onLogin, onOauthKakao, onOauthGoogle }) {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#1B7EA6" }}>
+        <Avatar sx={{ m: 1, bgcolor: "#338c1b" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -105,101 +77,32 @@ export default function Signin({ onLogin, onOauthKakao, onOauthGoogle }) {
             autoComplete="current-password"
             inputRef={pwdRef}
           />
-          <Button
+          <Typography sx={{ color: "red" }} mb={1}>
+            {error}
+          </Typography>
+          <CustomButton
             type="submit"
+            size="large"
             fullWidth
             variant="contained"
-            sx={{
-              mt: 3,
-              mb: 1,
-              height: "3.5rem",
-              backgroundColor: "#3887A6",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-            }}
             onClick={handleLogin}
           >
             로그인
-          </Button>
+          </CustomButton>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              mt: 2,
-              mb: 2,
-              height: "3.5rem",
-              backgroundColor: "transparent",
-              backgroundImage:
-                "url(https://i.postimg.cc/qMtHXhX0/kakao-login-medium-wide.png)",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }}
-            onClick={handleOauthKakao}
-          ></Button>
-
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(props) => (
-              <button
-                css={css`
-                  width: 100%;
-                  height: 3.5rem;
-                  border-radius: 8px;
-                  margin-top: 0.5rem;
-                  background-color: transparent;
-                  cursor: pointer;
-                  border: 1.5px solid black;
-                  outline: 0;
-                  position: relative;
-                  display: flex;
-                  justify-content: center;
-                  p {
-                    margin: auto 0;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                  }
-                `}
-                onClick={props.onClick}
-              >
-                <img
-                  src="https://i.postimg.cc/X73FC2HF/google-icon.png"
-                  alt="google"
-                  css={css`
-                    position: absolute;
-                    left: 2px;
-                    top: 2px;
-                    width: auto;
-                    height: 90%;
-                  `}
-                />
-                <p>구글 로그인</p>
-              </button>
-            )}
-            onSuccess={(result) => handleOauthGoogle(result.tokenObj)}
-            onFailure={(result) => console.log(result)}
-            cookiePolicy={"single_host_origin"}
-          />
-
-          <Grid container>
-            <Grid item xs></Grid>
-            <Grid item>
-              <LinkRoute
-                to="/signup"
-                css={css`
-                  font-size: 0.8rem;
-                  color: #1b7ea6;
-                `}
-              >
-                Don't have an account? Sign Up
-              </LinkRoute>
-            </Grid>
+          <Grid item container mt={1} justifyContent="flex-end">
+            <LinkRoute
+              to="/signup"
+              css={css`
+                font-size: 1rem;
+                color: #338c1b;
+              `}
+            >
+              회원가입 하기
+            </LinkRoute>
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
 }

@@ -55,6 +55,7 @@ const EditForm = ({ product, onChangeField }) => {
             name="stock"
             label="재고"
             value={product.stock}
+            InputProps={{ inputProps: { min: 1 } }}
             onChange={(e) =>
               onChangeField({
                 mode: "product",
@@ -72,6 +73,7 @@ const EditForm = ({ product, onChangeField }) => {
             name="price"
             label="가격"
             value={product.price}
+            InputProps={{ inputProps: { min: 1 } }}
             onChange={(e) =>
               onChangeField({
                 mode: "product",
@@ -90,6 +92,7 @@ const EditForm = ({ product, onChangeField }) => {
             name="delivery"
             label="배달비"
             value={product.delivery}
+            InputProps={{ inputProps: { min: 0 } }}
             onChange={(e) =>
               onChangeField({
                 mode: "product",

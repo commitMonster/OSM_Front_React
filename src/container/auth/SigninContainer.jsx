@@ -22,9 +22,7 @@ const SigninContainer = (props) => {
   // 로그인 성공/실패 처리
   useEffect(() => {
     if (authError) {
-      console.log("오류발생");
-      console.log(authError);
-      setError("로그인 실패");
+      setError("아이디와 패스워드를 다시 입력해주세요");
     }
     if (auth) {
       console.log("로그인 성공");

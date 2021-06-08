@@ -49,7 +49,11 @@ const OrderContainer = () => {
     if (success) {
       alert("결제 성공");
       dispatch(setTid(response.pg_tid));
-      history.push(`/orderSuccess${params.once && "?once=true"}`);
+      if (params.once) {
+        history.push("/orderSuccess?once=true");
+      } else {
+        history.push("/orderSuccess");
+      }
     } else {
       alert(`결제 실패: ${error_msg}`);
       history.push("/");

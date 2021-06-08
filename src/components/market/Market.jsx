@@ -116,7 +116,7 @@ const Market = ({
   return (
     <React.Fragment>
       <Helmet>
-        <title>EC몰 | 상품보기</title>
+        <title>EC Mall | 상품보기</title>
       </Helmet>
       <Grid container>
         <Grid

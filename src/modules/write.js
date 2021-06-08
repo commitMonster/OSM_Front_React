@@ -74,7 +74,8 @@ export const createBanner = createAction(
 );
 export const updateBanner = createAction(
   UPDATE_BANNER,
-  ({ title, description, type, image, startDate, endDate }) => ({
+  ({ id, title, description, type, image, startDate, endDate }) => ({
+    id,
     title,
     description,
     type,
@@ -113,8 +114,8 @@ const initialState = {
   product: {
     name: "",
     description: "",
-    stock: 0,
-    price: 0,
+    stock: 1,
+    price: 1,
     image: "",
     delivery: 0,
     categoryId: 1,
@@ -133,6 +134,8 @@ const initialState = {
     bannerError: null,
     originalId: null,
   },
+  success: false,
+  error: null,
 };
 
 const write = handleActions(
@@ -151,18 +154,21 @@ const write = handleActions(
         product: null,
         productError: null,
       },
+      success: false,
     }),
     [CREATE_PRODUCT_SUCCESS]: (state, { payload: product }) => ({
       ...state,
       product: {
         product,
       },
+      success: true,
     }),
     [CREATE_PRODUCT_FAILURE]: (state, { payload: productError }) => ({
       ...state,
       product: {
         productError,
       },
+      success: false,
     }),
     [SET_ORIGINAL_PRODUCT]: (state, { payload: product }) => ({
       ...state,
@@ -182,12 +188,14 @@ const write = handleActions(
       product: {
         product,
       },
+      success: true,
     }),
     [UPDATE_PRODUCT_FAILURE]: (state, { payload: productError }) => ({
       ...state,
       product: {
         productError,
       },
+      success: false,
     }),
     [CREATE_BANNER]: (state) => ({
       ...state,
@@ -195,18 +203,21 @@ const write = handleActions(
         banner: null,
         bannerError: null,
       },
+      success: false,
     }),
     [CREATE_BANNER_SUCCESS]: (state, { payload: banner }) => ({
       ...state,
       banner: {
         banner,
       },
+      success: true,
     }),
     [CREATE_BANNER_FAILURE]: (state, { payload: bannerError }) => ({
       ...state,
       banner: {
         bannerError,
       },
+      success: false,
     }),
     [SET_ORIGINAL_BANNER]: (state, { payload: banner }) => ({
       ...state,
@@ -217,9 +228,7 @@ const write = handleActions(
         image: banner.image,
         startDate: banner.startDate,
         endDate: banner.endDate,
-        banner: banner.banner,
-        bannerError: banner.bannerError,
-        originalId: banner.originalId,
+        originalId: banner.id,
       },
     }),
     [UPDATE_BANNER_SUCCESS]: (state, { payload: banner }) => ({
@@ -227,12 +236,14 @@ const write = handleActions(
       banner: {
         banner,
       },
+      success: true,
     }),
     [UPDATE_BANNER_FAILURE]: (state, { payload: bannerError }) => ({
       ...state,
       banner: {
         bannerError,
       },
+      success: false,
     }),
   },
   initialState

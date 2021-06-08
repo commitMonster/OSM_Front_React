@@ -14,7 +14,7 @@ const Basket = ({
   return (
     <Container maxWidth="lg">
       <Helmet>
-        <title>EC몰 | 장바구니</title>
+        <title>EC Mall | 장바구니</title>
       </Helmet>
       <Grid container spacing={2}>
         <Grid item container xs={8}>

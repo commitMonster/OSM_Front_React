@@ -56,8 +56,25 @@ const EditBanner = ({
 }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [value, setValue] = React.useState([null, null]);
 
   const handleNext = () => {
+    if (activeStep === 0 && [banner.title, banner.description].includes("")) {
+      alert("모든 정보를 입력해주세요");
+      return activeStep;
+    }
+    if (activeStep === 0 && value.includes(null)) {
+      alert("기간을 다시 입력해주세요");
+      return activeStep;
+    }
+    if (activeStep === 1 && images.length === 0) {
+      alert("최소 한개의 이미지를 등록해주세요");
+      return activeStep;
+    }
+    if (activeStep === steps.length - 1) {
+      onPublish();
+      return;
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -73,6 +90,8 @@ const EditBanner = ({
             banner={banner}
             onChangeField={onChangeField}
             onDataChange={onDataChange}
+            value={value}
+            setValue={setValue}
           />
         );
       case 1:
@@ -105,9 +124,7 @@ const EditBanner = ({
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
-              onPublish()
-            ) : (
+            {activeStep === steps.length ? null : (
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>

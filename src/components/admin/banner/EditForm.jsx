@@ -15,9 +15,7 @@ import DateRangePicker from "@material-ui/lab/DateRangePicker";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 
-const EditForm = ({ banner, onChangeField, onDataChange }) => {
-  const [value, setValue] = useState([null, null]);
-
+const EditForm = ({ banner, onChangeField, onDataChange, value, setValue }) => {
   return (
     <>
       <Typography variant="h6" gutterBottom>

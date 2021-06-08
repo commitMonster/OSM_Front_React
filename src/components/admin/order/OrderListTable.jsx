@@ -64,7 +64,23 @@ const OrderCard = ({ order, onManage }) => {
       <Grid
         item
         container
-        xs={3}
+        xs={4}
+        sx={{ fontSize: "1.3rem", fontWeight: "500" }}
+      >
+        주문번호 : {order.id}
+      </Grid>
+      <Grid
+        item
+        container
+        xs={8}
+        sx={{ fontSize: "1.3rem", fontWeight: "500" }}
+      >
+        수령인 : {order.destination.receiver + " / " + order.destination.phone}
+      </Grid>
+      <Grid
+        item
+        container
+        xs={4}
         sx={{ fontSize: "1.3rem", fontWeight: "500" }}
       >
         주문 날짜 :
@@ -73,7 +89,7 @@ const OrderCard = ({ order, onManage }) => {
       <Grid
         item
         container
-        xs={9}
+        xs={8}
         sx={{ fontSize: "1.3rem", fontWeight: "500" }}
       >
         배송지 :{" "}
@@ -84,6 +100,7 @@ const OrderCard = ({ order, onManage }) => {
           <ProductList basket={basket} />
         ))}
       </Grid>
+
       <Grid item container xs={12} m={2} alignItems="center">
         <Grid item xs={4}>
           <Button
@@ -97,9 +114,16 @@ const OrderCard = ({ order, onManage }) => {
             {stateReduce(order.state)}
           </Button>
         </Grid>
+        <Grid item xs={2} pl={4}>
+          {(order.state === "shipped" || order.state === "complete") && (
+            <Button fullWidth variant="contained">
+              상품평
+            </Button>
+          )}
+        </Grid>
         <Grid
           item
-          xs={8}
+          xs={6}
           sx={{ fontSize: "1.5rem", fontweight: "bold", textAlign: "right" }}
         >
           총 가격 : {order.total + order.delivery}
@@ -113,7 +137,7 @@ const orderListTable = ({ orderList, onManage }) => {
   return (
     <>
       <Helmet>
-        <title>주문내역</title>
+        <title>EC Mall 관리페이지 | 주문 내역</title>
       </Helmet>
       <Grid item container xs={12} m={2}>
         {orderList.map((order) => (

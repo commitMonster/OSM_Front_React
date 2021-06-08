@@ -4,9 +4,6 @@ import * as React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -15,24 +12,7 @@ import Container from "@material-ui/core/Container";
 import { useRef } from "react";
 import { Link as LinkRoute } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Hippy
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import CustomButton from "../common/CustomButton";
 
 export default function Signup({
   onSignup,
@@ -64,7 +44,7 @@ export default function Signup({
   return (
     <Container component="main" maxWidth="xs">
       <Helmet>
-        <title>EC몰 | 회원가입</title>
+        <title>EC Mall | 회원가입</title>
       </Helmet>
       <Box
         sx={{
@@ -74,7 +54,7 @@ export default function Signup({
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#1B7EA6" }}>
+        <Avatar sx={{ m: 1, bgcolor: "#338c1b" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -190,38 +170,29 @@ export default function Signup({
               </Typography>
             </Grid>
           </Grid>
-          <Button
+          <CustomButton
             type="submit"
+            size="large"
             fullWidth
             variant="contained"
-            sx={{
-              mt: 5,
-              mb: 1,
-              height: "3.5rem",
-              backgroundColor: "#3887A6",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-            }}
             onClick={handleSignup}
           >
             회원 가입
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <LinkRoute
-                to="/signin"
-                css={css`
-                  font-size: 0.8rem;
-                  color: #1b7ea6;
-                `}
-              >
-                Already have an account? Sign in
-              </LinkRoute>
-            </Grid>
+          </CustomButton>
+
+          <Grid item container mt={1} justifyContent="flex-end">
+            <LinkRoute
+              to="/signup"
+              css={css`
+                font-size: 1rem;
+                color: #338c1b;
+              `}
+            >
+              로그인 하기
+            </LinkRoute>
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 }

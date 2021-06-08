@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 const baseURL = "https://shop.dnatuna.fun/api/";
 
 const ProductList = ({ products }) => (
@@ -57,6 +58,9 @@ const ProductCard = ({ product }) => (
 const OrderSuccess = ({ order }) => {
   return (
     <Container maxWidth="md">
+      <Helmet>
+        <title>EC Mall | 주문완료</title>
+      </Helmet>
       <Grid container spacing={2}>
         <Grid item container xs={12} mb={2}>
           <Typography variant="h4">주문이 완료되었습니다!</Typography>
