@@ -75,6 +75,7 @@ const BasketItem = ({ order, onDelete, onEdit }) => {
               variant="standard"
               label="수량"
               value={order.count}
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={(e) =>
                 onEdit({
                   id: order.id,

@@ -77,112 +77,106 @@ const ProductListTable = ({
   };
 
   return (
-    <Grid container spacing={3} sx={{ m: 2, pl: 5 }}>
-      <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
-          <Box
-            sx={{
-              m: 2,
-              flex: 1,
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Button onClick={() => {}}>선택삭제</Button>
-            <Button sx={{ mx: 1 }} onClick={() => {}}>
-              전체삭제
-            </Button>
-            <Button color="primary" variant="contained">
-              <Link to="/admin/editProduct">물품 추가</Link>
-            </Button>
-          </Box>
-          <Table sx={{ ".MuiTableCell-root": { textAlign: "center" } }}>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedProductIds.length === products.length}
-                    color="primary"
-                    indeterminate={
-                      selectedProductIds.length > 0 &&
-                      selectedProductIds.length < products.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
-                <TableCell>상품 이미지</TableCell>
-                <TableCell>상품 이름</TableCell>
-                <TableCell>카테고리</TableCell>
-                <TableCell>가격</TableCell>
-                <TableCell>배달비</TableCell>
-                <TableCell>인기도</TableCell>
-                <TableCell>재고</TableCell>
-                <TableCell>수정 / 삭제</TableCell>
-              </TableRow>
-            </TableHead>
+    <>
+      <Box
+        sx={{
+          m: 2,
+          flex: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Button onClick={() => {}}>선택삭제</Button>
+        <Button sx={{ mx: 1 }} onClick={() => {}}>
+          전체삭제
+        </Button>
+        <Button color="primary" variant="contained">
+          <Link to="/admin/editProduct">물품 추가</Link>
+        </Button>
+      </Box>
+      <Table sx={{ ".MuiTableCell-root": { textAlign: "center" } }}>
+        <TableHead>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                checked={selectedProductIds.length === products.length}
+                color="primary"
+                indeterminate={
+                  selectedProductIds.length > 0 &&
+                  selectedProductIds.length < products.length
+                }
+                onChange={handleSelectAll}
+              />
+            </TableCell>
+            <TableCell>상품 이미지</TableCell>
+            <TableCell>상품 이름</TableCell>
+            <TableCell>카테고리</TableCell>
+            <TableCell>가격</TableCell>
+            <TableCell>배달비</TableCell>
+            <TableCell>인기도</TableCell>
+            <TableCell>재고</TableCell>
+            <TableCell>수정 / 삭제</TableCell>
+          </TableRow>
+        </TableHead>
 
-            <TableBody>
-              {products.map((product) => (
-                <TableRow
-                  hover
-                  key={product.id}
-                  selected={selectedProductIds.indexOf(product.id) !== -1}
+        <TableBody>
+          {products.map((product) => (
+            <TableRow
+              hover
+              key={product.id}
+              selected={selectedProductIds.indexOf(product.id) !== -1}
+            >
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={selectedProductIds.indexOf(product.id) !== -1}
+                  onChange={(event) => handleSelectOne(event, product.id)}
+                  value="true"
+                />
+              </TableCell>
+              <TableCell>
+                <Box
+                  sx={{
+                    width: "3rem",
+                    height: "3rem",
+                    alignItems: "center",
+                    display: "flex",
+                    backgroundImage: `url(${baseURL}${product.image[0]})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                />
+              </TableCell>
+              <TableCell>
+                <Link to={`/admin/product/${product.id}`}>{product.name}</Link>
+              </TableCell>
+              <TableCell> {categoryIdReduce(product.categoryId)}</TableCell>
+              <TableCell>{product.price}</TableCell>
+              <TableCell>{product.delivery}</TableCell>
+              <TableCell>{product.score}</TableCell>
+              <TableCell>{product.stock}</TableCell>
+              <TableCell>
+                <Button
+                  onClick={() => {
+                    onEdit(product);
+                  }}
                 >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedProductIds.indexOf(product.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, product.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        width: "3rem",
-                        height: "3rem",
-                        alignItems: "center",
-                        display: "flex",
-                        backgroundImage: `url(${baseURL}${product.image[0]})`,
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Link to={`/admin/product/${product.id}`}>
-                      {product.name}
-                    </Link>
-                  </TableCell>
-                  <TableCell> {categoryIdReduce(product.categoryId)}</TableCell>
-                  <TableCell>{product.price}</TableCell>
-                  <TableCell>{product.delivery}</TableCell>
-                  <TableCell>{product.score}</TableCell>
-                  <TableCell>{product.stock}</TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => {
-                        onEdit(product);
-                      }}
-                    >
-                      수정
-                    </Button>
-                    <span> / </span>
-                    <Button
-                      onClick={() => {
-                        onDelete(product.id);
-                      }}
-                    >
-                      삭제
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
-    </Grid>
+                  수정
+                </Button>
+                <span> / </span>
+                <Button
+                  onClick={() => {
+                    onDelete(product.id);
+                  }}
+                >
+                  삭제
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 

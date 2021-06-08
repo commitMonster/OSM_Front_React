@@ -6,6 +6,7 @@ import {
   Users as UsersIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
+import AssignmentIcon from "@material-ui/icons/Assignment";
 
 const items = [
   {
@@ -17,6 +18,11 @@ const items = [
     href: "/admin/bannerList",
     icon: ShoppingBagIcon,
     title: "공지/이벤트목록",
+  },
+  {
+    href: "/admin/orderList",
+    icon: AssignmentIcon,
+    title: "주문내역",
   },
 ];
 

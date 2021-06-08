@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
+import OrderListTable from "../../../components/admin/order/OrderListTable";
+import { getOrderList, manageOrder } from "../../../modules/order";
 import qs from "qs";
-import OrderHistory from "../../components/mypage/OrderHistory";
-import { getOrderList, manageOrder } from "../../modules/order";
 
-const OrderHistoryContainer = (props) => {
+const OrderListTableContainer = (props) => {
   const { orderList, success } = useSelector((state) => state.order);
 
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ const OrderHistoryContainer = (props) => {
   if (!orderList) return null;
 
   return (
-    <OrderHistory
+    <OrderListTable
       orderList={orderList.orderList}
       selectedProductIds={selectedProductIds}
       setSelectedProductIds={setSelectedProductIds}
@@ -42,4 +42,4 @@ const OrderHistoryContainer = (props) => {
   );
 };
 
-export default OrderHistoryContainer;
+export default OrderListTableContainer;

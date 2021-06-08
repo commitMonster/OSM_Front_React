@@ -29,7 +29,7 @@ const ShowImg = styled.img`
     `}
 `;
 
-const Product = ({ product, onAddBasket, onOrder }) => {
+const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
   const price = product.price.toLocaleString("ko") + "원";
   const baseURL = "https://shop.dnatuna.fun/api/";
 
@@ -37,11 +37,6 @@ const Product = ({ product, onAddBasket, onOrder }) => {
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 568px)");
   const isRow = useMediaQuery("(max-width: 959px)");
-  const countRef = useRef();
-  console.log(showImg);
-  const handelAddBasket = () => {
-    onAddBasket(product.id, parseInt(countRef.current.value, 10));
-  };
 
   return (
     <React.Fragment>
@@ -183,11 +178,11 @@ const Product = ({ product, onAddBasket, onOrder }) => {
                 fullWidth
                 label="수량(개)"
                 autoFocus
-                defaultValue={1}
+                defaultValue={count}
+                onChange={setCount}
                 size="small"
                 required
                 InputProps={{ inputProps: { min: 1 } }}
-                inputRef={countRef}
               />
             </Grid>
             <Grid item xs={6} md={5}>
@@ -195,7 +190,7 @@ const Product = ({ product, onAddBasket, onOrder }) => {
                 fullWidth
                 variant="outlined"
                 disableElevation
-                onClick={handelAddBasket}
+                onClick={onAddBasket}
               >
                 장바구니에 넣기
               </CustomButton>
@@ -205,9 +200,7 @@ const Product = ({ product, onAddBasket, onOrder }) => {
                 fullWidth
                 variant="contained"
                 disableElevation
-                onClick={() => {
-                  onOrder(countRef.current.value);
-                }}
+                onClick={onOrder}
               >
                 구매 하기
               </CustomButton>

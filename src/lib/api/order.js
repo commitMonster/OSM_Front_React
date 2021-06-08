@@ -26,8 +26,8 @@ export const cancelOrder = async (id) => {
 };
 
 export const getOrderList = async ({
-  page,
-  pageSize,
+  page = 1,
+  pageSize = 5,
   start = "",
   end = "",
 }) => {

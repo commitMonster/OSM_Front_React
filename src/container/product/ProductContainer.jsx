@@ -11,11 +11,11 @@ const ProductContainer = ({ productId }) => {
   const { product, error } = useSelector((state) => state.products);
   const { currentItem } = useSelector((state) => state.basket);
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onOrder = (count) => {
+  const onOrder = () => {
     dispatch(
       setOrder({
         order: {
@@ -67,6 +67,7 @@ const ProductContainer = ({ productId }) => {
       product={product}
       onAddBasket={onAddBasket}
       onOrder={onOrder}
+      count={count}
       setCount={setCount}
     />
   );

@@ -12,7 +12,6 @@ import AdminRouter from "./AdminRouter";
 import OrderPage from "./pages/order/OrderPage";
 import OrderSuccessPage from "./pages/order/OrderSuccessPage";
 import OrderHistoryPage from "./pages/mypage/OrderHistoryPage";
-import DestinationListPage from "./pages/mypage/DestinationListPage";
 function App() {
   const dispath = useDispatch();
 
@@ -31,8 +30,7 @@ function App() {
       <Route path="/admin" component={AdminRouter} />
       <Route path="/order" component={OrderPage} />
       <Route path="/orderSuccess" component={OrderSuccessPage} />
-      <Route path={"/mypage/orderHistory"} component={OrderHistoryPage} />
-      <Route path="/mypage/destination" component={DestinationListPage} />
+      <Route path="/mypage" component={OrderHistoryPage} />
     </>
   );
 }

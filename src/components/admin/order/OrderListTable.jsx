@@ -8,13 +8,13 @@ const baseURL = "https://shop.dnatuna.fun/api/";
 const stateReduce = (state) => {
   switch (state) {
     case "wait":
-      return "배송 준비중입니다.";
+      return "배송 시작하기";
     case "shipping":
-      return "배송 진행중입니다.";
+      return "배송 완료하기";
     case "shipped":
-      return "구매 확정";
+      return "사용자의 구매확정 대기중...";
     case "complete":
-      return "주문이 완료되었습니다.";
+      return "주문 완료";
     default:
       return "";
   }
@@ -31,14 +31,14 @@ const ProductList = ({ basket }) => {
       p={2}
       alignItems="center"
     >
-      <Grid xs={2}>
+      <Grid xs={1}>
         <Avatar
           src={baseURL + basket.product.image[0]}
           variant="rounded"
           sx={{ width: "70px", height: "70px" }}
         />
       </Grid>
-      <Grid item container xs={7}>
+      <Grid item container xs={8}>
         <Grid xs={12}>{basket.product.name}</Grid>
       </Grid>
       <Grid item Container xs={3}>
@@ -89,11 +89,7 @@ const OrderCard = ({ order, onManage }) => {
           <Button
             fullWidth
             variant="contained"
-            disabled={
-              order.state === "wait" ||
-              order.state === "shipping" ||
-              order.state === "complete"
-            }
+            disabled={order.state === "shipped" || order.state === "complete"}
             onClick={() => {
               onManage(order.id);
             }}
@@ -113,7 +109,7 @@ const OrderCard = ({ order, onManage }) => {
   );
 };
 
-const OrderHistory = ({ orderList, onManage }) => {
+const orderListTable = ({ orderList, onManage }) => {
   return (
     <>
       <Helmet>
@@ -128,4 +124,4 @@ const OrderHistory = ({ orderList, onManage }) => {
   );
 };
 
-export default OrderHistory;
+export default orderListTable;

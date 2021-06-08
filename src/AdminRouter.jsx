@@ -8,6 +8,7 @@ import AdminMainPage from "./pages/admin/AdminMainPage";
 import ProductPage from "./pages/admin/ProductPage";
 import ProductListPage from "./pages/admin/ProductListPage";
 import EditProductPage from "./pages/admin/EditProductPage";
+import OrderListPage from "./pages/admin/OrderListPage";
 
 const AdminRoute = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const AdminRoute = () => {
 
   useEffect(() => {
     if (user && !user.isAdmin) {
+      alert("접근이 불가능합니다.");
       history.push("/");
     }
   }, [dispatch, user, history]);
@@ -30,6 +32,7 @@ const AdminRoute = () => {
       <Route path="/admin/productList" component={ProductListPage} />
       <Route path="/admin/product/:id" component={ProductPage} />
       <Route path="/admin/editProduct" component={EditProductPage} />
+      <Route path="/admin/orderList" component={OrderListPage} />
     </>
   );
 };

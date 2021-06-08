@@ -92,6 +92,26 @@ const order = handleActions(
       ...state,
       error,
     }),
+    [GET_ORDER_LIST_SUCCESS]: (state, { payload: orderList }) => ({
+      ...state,
+      orderList,
+    }),
+    [GET_ORDER_LIST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+    [MANAGE_ORDER]: (state) => ({
+      ...state,
+      success: false,
+    }),
+    [MANAGE_ORDER_SUCCESS]: (state) => ({
+      ...state,
+      success: true,
+    }),
+    [MANAGE_ORDER_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
     [INITIALIZE]: (state) => initialState,
   },
   initialState

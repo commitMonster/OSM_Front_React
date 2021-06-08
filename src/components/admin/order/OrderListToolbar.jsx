@@ -16,30 +16,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import palette from "../../../lib/styles/palette";
 
-const typeList = [
-  {
-    id: "",
-    title: "전체 보기",
-  },
-  {
-    id: "now",
-    title: "진행중인 이벤트",
-  },
-  {
-    id: "end",
-    title: "종료된 이벤트",
-  },
-];
-
-const activeTypo = (type, state, title) => {
-  return type === state ? (
-    <Typography sx={{ color: palette.blue }}>{title}</Typography>
-  ) : (
-    <Typography sx={{ color: "inherit" }}>{title}</Typography>
-  );
-};
-
-const ProductListToolbar = ({ type, sort, onDataChange, onSortChange }) => {
+const OrderListToolbar = ({ onDataChange, onSortChange }) => {
   const [dataError, setDateError] = useState(false);
   const [value, setValue] = useState([null, null]);
 
@@ -51,8 +28,8 @@ const ProductListToolbar = ({ type, sort, onDataChange, onSortChange }) => {
         minWidth: 1050,
       }}
     >
-      <Grid container alignItems="center" spacing={2}>
-        <Grid item container xs={6} sx={{ ".css-wne9d8": { flex: 1 } }}>
+      <Grid container alignItems="center" spacing={2} justifyContent="center">
+        <Grid item container xs={10} sx={{ ".css-wne9d8": { flex: 1 } }}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateRangePicker
               calendars={2}
@@ -81,40 +58,9 @@ const ProductListToolbar = ({ type, sort, onDataChange, onSortChange }) => {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item container xs={6}>
-          {typeList.map((item) => (
-            <Button
-              color="inherit"
-              onClick={() => {
-                type !== item.id
-                  ? onSortChange(item.id, "desc")
-                  : sort === "desc"
-                  ? onSortChange(item.id, "asc")
-                  : onSortChange(item.id, "desc");
-              }}
-              sx={{
-                flex: 1,
-              }}
-            >
-              {activeTypo(type, item.id, item.title)}
-              {type === item.id &&
-                (sort === "desc" ? (
-                  <ArrowDropDownIcon
-                    color="inherit"
-                    sx={{ color: palette.blue }}
-                  />
-                ) : (
-                  <ArrowDropUpIcon
-                    color="inherit"
-                    sx={{ color: palette.blue }}
-                  />
-                ))}
-            </Button>
-          ))}
-        </Grid>
       </Grid>
     </Card>
   );
 };
 
-export default ProductListToolbar;
+export default OrderListToolbar;

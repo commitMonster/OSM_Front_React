@@ -46,7 +46,7 @@ const NavItem = ({ href, icon: Icon, title, ...rest }) => {
         }}
         to={href}
       >
-        {Icon && <Icon size="20" />}
+        {Icon && <Icon size="24" />}
         <span>{title}</span>
       </Button>
     </ListItem>

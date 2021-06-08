@@ -101,13 +101,15 @@ function Header({ user, count, onSearch, query }) {
           <IconButton onClick={handleSearch}>
             <SearchIcon />
           </IconButton>
-          <IconButton
-            onClick={() => {
-              history.push("/mypage/orderHistory");
-            }}
-          >
-            <PersonIcon />
-          </IconButton>
+          {user && !user.isAdmin && (
+            <IconButton
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            >
+              <PersonIcon />
+            </IconButton>
+          )}
           <IconButton
             onClick={() => {
               history.push("/basket");
