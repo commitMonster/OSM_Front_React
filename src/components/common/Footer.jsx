@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import { Grid, Toolbar } from "@material-ui/core";
+import { Toolbar } from "@material-ui/core";
 
 const sections = [
   { title: "회사소개", url: "#" },

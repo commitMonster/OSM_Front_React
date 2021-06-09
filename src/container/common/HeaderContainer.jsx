@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Header from "../../components/common/Header";
 import qs from "qs";
 import { useHistory, withRouter } from "react-router";
-import { check } from "../../modules/user";
 
 const HeaderContainer = ({ location }) => {
   const { user, count } = useSelector((state) => state.user);

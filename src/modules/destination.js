@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from "../lib/utils/createRequestSaga";
 import * as destinationAPI from "../lib/api/destination";
-import { call, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 
 const INITIALIZE = "payment/INITIALIZE";
 const [

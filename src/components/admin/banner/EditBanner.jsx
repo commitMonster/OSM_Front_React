@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import EditForm from "./EditForm";
 import UploadImageForm from "./UploadImageForm";
 import Preview from "./Preview";
-import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

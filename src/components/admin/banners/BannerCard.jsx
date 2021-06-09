@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
 import { DateChange } from "../../../lib/utils/dateChange";

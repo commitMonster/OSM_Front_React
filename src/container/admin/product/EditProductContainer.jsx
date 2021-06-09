@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import EditProduct from "../../../components/admin/product/EditProduct";
-import { createImages, deleteImage, setImage } from "../../../modules/images";
-import { getProduct } from "../../../modules/products";
+import { createImages, setImage } from "../../../modules/images";
 import {
   changeField,
   createProduct,

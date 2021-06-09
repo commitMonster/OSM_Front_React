@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import { css } from "@emotion/react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,8 +15,9 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initialUser, signout } from "../../modules/user";
-import { useRef, memo, useState } from "react";
+import { memo, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
+import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 const sections = [
   { title: "Market", url: "market" },
@@ -101,13 +102,21 @@ function Header({ user, count, onSearch, query }) {
           <IconButton onClick={handleSearch}>
             <SearchIcon />
           </IconButton>
-          {user && !user.isAdmin && (
+          {user && !user.isAdmin ? (
             <IconButton
               onClick={() => {
                 history.push("/mypage");
               }}
             >
               <PersonIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              onClick={() => {
+                history.push("/admin");
+              }}
+            >
+              <BrightnessLowIcon />
             </IconButton>
           )}
           <IconButton

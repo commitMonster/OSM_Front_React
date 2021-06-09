@@ -1,6 +1,5 @@
 import { Box, Container, Divider, Paper } from "@material-ui/core";
-import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import React from "react";
 import {
   DataStyle,
   TextStyle,

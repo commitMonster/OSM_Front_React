@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Router, useHistory } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import BannerPage from "./pages/admin/BannerPage";
 import BannerListPage from "./pages/admin/BannerListPage";
 import EditBannerPage from "./pages/admin/EditBannerPage";

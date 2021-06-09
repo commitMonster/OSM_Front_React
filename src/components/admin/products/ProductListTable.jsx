@@ -1,9 +1,7 @@
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
   Button,
   Checkbox,
-  Grid,
   Table,
   TableBody,
   TableCell,
@@ -36,6 +34,7 @@ const ProductListTable = ({
   setSelectedProductIds,
   onEdit,
   onDelete,
+  onCreate,
 }) => {
   const baseURL = "https://shop.dnatuna.fun/api/";
   const handleSelectAll = (event) => {
@@ -94,8 +93,8 @@ const ProductListTable = ({
         <Button sx={{ mx: 1 }} onClick={() => {}}>
           전체삭제
         </Button>
-        <Button color="primary" variant="contained">
-          <Link to="/admin/editProduct">물품 추가</Link>
+        <Button color="primary" variant="contained" onClick={onCreate}>
+          물품 추가
         </Button>
       </Box>
       <Table sx={{ ".MuiTableCell-root": { textAlign: "center" } }}>

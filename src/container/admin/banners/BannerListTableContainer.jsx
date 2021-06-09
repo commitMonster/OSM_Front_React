@@ -8,7 +8,11 @@ import {
   getBannerList,
   initialize,
 } from "../../../modules/banners";
-import { setOriginalBanner } from "../../../modules/write";
+import {
+  setOriginalBanner,
+  initialize as writeInitialize,
+} from "../../../modules/write";
+import { initialize as imageInitialize } from "../../../modules/images";
 import qs from "qs";
 
 const BannerListTableContainer = () => {
@@ -32,6 +36,12 @@ const BannerListTableContainer = () => {
     dispatch(deleteBanner(bannerId));
   };
 
+  const onCreate = () => {
+    dispatch(writeInitialize({ mode: "banner" }));
+    dispatch(imageInitialize());
+    history.push("/admin/editBanner");
+  };
+
   const onActivate = (bannerId, activation) => {
     setLoading(true);
     dispatch(activateBanner({ bannerId, activation }));
@@ -51,6 +61,7 @@ const BannerListTableContainer = () => {
     <BannerListTable
       onEdit={onEdit}
       onDelete={onDelete}
+      onCreate={onCreate}
       onActivate={onActivate}
       bannerlist={banners}
     />

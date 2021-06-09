@@ -5,7 +5,6 @@ import EditBanner from "../../../components/admin/banner/EditBanner";
 import { getBannerList } from "../../../modules/banners";
 import {
   createImages,
-  deleteImage,
   setImage,
   initialize as initializeImage,
 } from "../../../modules/images";
@@ -57,7 +56,6 @@ const EditBannerContainer = () => {
   );
 
   const onDataChange = (date) => {
-    console.log(date);
     if (!date[0] || !date[1]) return;
 
     const start = `${date[0].getFullYear()}-${

@@ -1,6 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Card, Container, Grid } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Avatar, Button, Card, Grid } from "@material-ui/core";
 import { Helmet } from "react-helmet-async";
 
 const baseURL = "https://shop.dnatuna.fun/api/";

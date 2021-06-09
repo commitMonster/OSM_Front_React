@@ -140,10 +140,7 @@ const initialState = {
 
 const write = handleActions(
   {
-    [INITIALIZE]: (state, { payload: mode }) => ({
-      ...state,
-      [mode]: initialState[mode],
-    }),
+    [INITIALIZE]: (state, { payload: mode }) => initialState,
     [CHANGE_FIELD]: (state, { payload: { mode, key, value } }) => ({
       ...state,
       [mode]: { ...state[mode], [key]: value },

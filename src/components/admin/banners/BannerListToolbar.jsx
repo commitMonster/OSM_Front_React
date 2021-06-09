@@ -2,16 +2,14 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
   Grid,
-  IconButton,
   TextField,
   Typography,
 } from "@material-ui/core";
 import DateRangePicker from "@material-ui/lab/DateRangePicker";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import palette from "../../../lib/styles/palette";

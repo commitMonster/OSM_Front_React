@@ -15,7 +15,6 @@ const OrderListToolbarContainer = (props) => {
   });
 
   const onDataChange = (date) => {
-    console.log(date);
     if (!date[0] || !date[1]) return;
     const start = `${date[0].getFullYear()}-${
       date[0].getMonth() + 1

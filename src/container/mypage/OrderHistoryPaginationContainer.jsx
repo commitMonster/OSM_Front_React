@@ -31,7 +31,10 @@ const OrderHistoryPaginationContainer = (props) => {
         pt: 3,
         pb: 3,
       }}
-      count={parseInt(orderList.orderCount / (params.pageSize || 3), 10) + 1}
+      count={
+        parseInt(orderList.orderCount / (params.pageSize || 3), 10) +
+        (orderList.orderCount % (params.pageSize || 3) === 0 ? 0 : 1)
+      }
       page={parseInt(params.page || 1, 10)}
       onChange={onPageChange}
     />

@@ -5,7 +5,6 @@ import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 import { useState } from "react";
 
 const OrderHistoryToolbar = ({ onDataChange }) => {
-  const [dataError, setDateError] = useState(false);
   const [value, setValue] = useState([null, null]);
 
   return (

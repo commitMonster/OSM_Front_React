@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ProductListToolbar from "../../../components/admin/products/ProductListToolbar";
 import qs from "qs";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
@@ -25,7 +24,6 @@ const BannerListToolbarContainer = (props) => {
   };
 
   const onDataChange = (date) => {
-    console.log(date);
     if (!date[0] || !date[1]) return;
     const start = `${date[0].getFullYear()}-${
       date[0].getMonth() + 1
@@ -39,14 +37,6 @@ const BannerListToolbarContainer = (props) => {
       end: end,
     });
     history.push(`/admin/bannerList/?${query}`);
-  };
-
-  const onSearch = (q) => {
-    const query = qs.stringify({
-      ...params,
-      q: q,
-    });
-    history.push(`/admin/productList/?${query}`);
   };
 
   useEffect(() => {

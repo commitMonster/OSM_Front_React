@@ -1,16 +1,14 @@
 import {
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   Grid,
   Typography,
-  Checkbox,
   IconButton,
   TextField,
 } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const BasketItem = ({ order, onDelete, onEdit }) => {

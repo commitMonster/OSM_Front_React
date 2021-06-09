@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation, withRouter } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import Order from "../../components/order/Order";
 import { setTid } from "../../modules/order";
 import qs from "qs";
@@ -15,11 +15,11 @@ const OrderContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  useEffect(() => {
-    console.log(params.once);
-  }, [dispatch]);
-
   function onClickPayment() {
+    if (!destination) {
+      alert("배송지를 선택해주세요!");
+      return;
+    }
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
     IMP.init("imp61121966");

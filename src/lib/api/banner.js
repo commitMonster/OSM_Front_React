@@ -62,7 +62,7 @@ export const updateBanner = async ({
   endDate,
 }) => {
   const response = await axios({
-    methd: "patch",
+    method: "patch",
     url: `/api/banner/${id}`,
     data: { title, description, type, image, startDate, endDate },
   });

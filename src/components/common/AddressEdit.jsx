@@ -1,17 +1,12 @@
 import {
-  Box,
-  Button,
   Checkbox,
   FormControlLabel,
   Grid,
-  Modal,
   TextField,
   Typography,
 } from "@material-ui/core";
-import { CheckBox } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { useSelector } from "react-redux";
 import CustomButton from "./CustomButton";
 import CustomModal from "./CustomModal";
 
@@ -47,7 +42,6 @@ const AddressEdit = ({
   const [open, setOpen] = useState(false);
 
   const onComplete = (data) => {
-    console.log(data);
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -59,7 +53,6 @@ const AddressEdit = ({
         extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
     }
     fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-    console.log(fullAddress);
     setMainAddress(fullAddress);
     setZoneNumber(data.zonecode);
     setOpen(false);
@@ -76,11 +69,9 @@ const AddressEdit = ({
       isDefault,
     };
     if (mode === "create") {
-      console.log(mode);
       onCreateDestination(body);
       setMode("list");
     } else {
-      console.log(mode);
       onUpdateDestination({ ...body, id: currentDestination.id });
       setMode("list");
     }

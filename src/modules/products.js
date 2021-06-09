@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from "../lib/utils/createRequestSaga";
 import * as productsAPI from "../lib/api/product";
-import { call, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 
 const [GET_PRODUCT, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAILURE] =
   createRequestActionTypes("products/GET_PRODUCT");

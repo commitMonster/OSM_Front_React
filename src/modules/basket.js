@@ -77,13 +77,19 @@ export default handleActions(
       basket: null,
       error: null,
     }),
+    [GET_BASKET_LIST]: (state) => ({
+      ...state,
+      success: false,
+    }),
     [GET_BASKET_LIST_SUCCESS]: (state, { payload: data }) => ({
       ...state,
       basket: data,
+      success: true,
     }),
     [GET_BASKET_LIST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error: error,
+      success: false,
     }),
     [ADD_BASKET]: (state) => ({
       ...state,

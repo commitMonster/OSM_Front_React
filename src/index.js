@@ -10,14 +10,13 @@ import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
-import { check, tempSetUser } from "./modules/user";
-import ReduxThunk from "redux-thunk";
+import { check } from "./modules/user";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware, logger))
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 function loadUser() {

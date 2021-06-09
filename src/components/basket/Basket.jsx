@@ -1,4 +1,4 @@
-import { Button, Card, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import BasketItem from "./BasketItem";
 import { Helmet } from "react-helmet-async";

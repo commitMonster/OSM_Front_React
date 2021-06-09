@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from "../lib/utils/createRequestSaga";
 import * as bannerAPI from "../lib/api/banner";
-import { call, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 
 /**액션 타입 지정 */
 const [GET_BANNER, GET_BANNER_SUCCESS, GET_BANNER_FAILURE] =

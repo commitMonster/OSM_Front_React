@@ -1,5 +1,5 @@
 import { Pagination } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 import qs from "qs";
 import { useSelector } from "react-redux";
@@ -31,7 +31,10 @@ const OrderListPaginationContainer = (props) => {
         pt: 3,
         pb: 3,
       }}
-      count={parseInt(orderList.orderCount / (params.pageSize || 3), 10) + 1}
+      count={
+        parseInt(orderList.orderCount / (params.pageSize || 3), 10) +
+        (orderList.orderCount % (params.pageSize || 3) === 0 ? 0 : 1)
+      }
       page={parseInt(params.page || 1, 10)}
       onChange={onPageChange}
     />

@@ -45,8 +45,6 @@ const SignupContainer = (props) => {
       return;
     }
     if (auth) {
-      console.log("회원가입 성공");
-      console.log(auth);
       dispatch(check());
     }
   }, [auth, authError, dispatch]);
@@ -54,6 +52,7 @@ const SignupContainer = (props) => {
   // user 정보 확인
   useEffect(() => {
     if (user) {
+      alert(`${user.name}님 안녕하세요!`);
       history.push("/");
     }
   }, [user, history]);

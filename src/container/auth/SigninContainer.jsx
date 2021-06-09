@@ -25,7 +25,6 @@ const SigninContainer = (props) => {
       setError("아이디와 패스워드를 다시 입력해주세요");
     }
     if (auth) {
-      console.log("로그인 성공");
       dispatch(check());
     }
   }, [auth, authError, dispatch]);

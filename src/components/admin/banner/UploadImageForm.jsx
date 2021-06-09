@@ -9,7 +9,6 @@ const UploadImageForm = ({ images, uploadImage, imgaeLoading }) => {
   const [defaultImages, setDefaultImages] = useState();
 
   const onDrop = (files, pictures) => {
-    console.log(files, pictures);
     uploadImage(
       files,
       pictures
@@ -23,10 +22,6 @@ const UploadImageForm = ({ images, uploadImage, imgaeLoading }) => {
       setDefaultImages(images.map((item) => baseURL + item));
     }
   }, [images]);
-
-  useEffect(() => {
-    console.log(defaultImages);
-  }, [defaultImages]);
 
   return (
     <React.Fragment>

@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from "../lib/utils/createRequestSaga";
 import * as orderAPI from "../lib/api/order";
-import { call, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 
 const [SET_ORDER, SET_ORDER_SUCCESS, SET_ORDER_FAILURE] =
   createRequestActionTypes("order/SET_ORDER");

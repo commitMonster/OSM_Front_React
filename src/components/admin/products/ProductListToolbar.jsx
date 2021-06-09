@@ -1,8 +1,6 @@
 import {
-  Box,
   Button,
   Card,
-  CardContent,
   Checkbox,
   FormControlLabel,
   Grid,

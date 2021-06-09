@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Box, Container, Grid } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import Budget from "./Budget";
 import Sales from "./Sales";
 import TasksProgress from "./TasksProgress";

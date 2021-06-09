@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Container, experimentalStyled } from "@material-ui/core";
+import FooterContainer from "../../../container/common/FooterContainer";
 import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSidebar";
 
@@ -40,6 +40,7 @@ const DashboardLayout = ({ children, onLogout }) => {
         <DashboardLayoutContainer>
           <DashboardLayoutContent>
             <Container maxWidth={false}>{children}</Container>
+            <FooterContainer />
           </DashboardLayoutContent>
         </DashboardLayoutContainer>
       </DashboardLayoutWrapper>

@@ -20,6 +20,23 @@ const ShowImg = styled.img`
     `}
 `;
 
+const categoryReducer = (id) => {
+  switch (id) {
+    case 1:
+      return "티셔츠";
+    case 2:
+      return "과장";
+    case 3:
+      return "텀블러";
+    case 4:
+      return "스티커";
+    case 5:
+      return "담요";
+    default:
+      return "";
+  }
+};
+
 const Product = ({ product }) => {
   const price = product.price.toLocaleString("ko") + "원";
   const baseURL = "https://shop.dnatuna.fun/api/";
@@ -118,6 +135,16 @@ const Product = ({ product }) => {
               >
                 <Divider />
               </Grid>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Typography sx={{ fontSize: "1.2rem" }}>
+                상품 설명 : {product.description}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Typography sx={{ fontSize: "1.2rem" }}>
+                카테고리 : {categoryReducer(product.categoryId)}
+              </Typography>
             </Grid>
             <Grid item xs={9} md={12}>
               <Typography variant="h4">가격 : {price}</Typography>

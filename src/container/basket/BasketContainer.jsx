@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Basket from "../../components/basket/Basket";
-import { editBasket, getBasketList, initialBasket } from "../../modules/basket";
+import { editBasket, getBasketList } from "../../modules/basket";
 import { deleteBasket } from "../../modules/basket";
-import qs from "qs";
 import { useHistory, withRouter } from "react-router";
 import { setOrder } from "../../modules/order";
 
@@ -29,6 +28,7 @@ const BasketContainer = () => {
     setTotalAmount(0);
     setProductList([]);
     setMaxDeliveryPrice(0);
+    let deliveryArray = [];
     basket.map((order) => {
       setTotalPrice(
         (totalPrice) => totalPrice + order.count * order.product.price
@@ -37,13 +37,10 @@ const BasketContainer = () => {
       setProductList((productList) =>
         productList.concat({ ...order.product, count: order.count })
       );
-      setMaxDeliveryPrice(
-        maxDeliveryPrice < order.product.delivery
-          ? order.product.delivery
-          : maxDeliveryPrice
-      );
+      deliveryArray.push(order.product.delivery);
     });
-  }, [basket]);
+    setMaxDeliveryPrice(Math.max(...deliveryArray));
+  }, [dispatch, basket, success]);
 
   const onDelete = (id) => {
     setLoading(true);

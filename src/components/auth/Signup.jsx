@@ -2,7 +2,6 @@
 import { jsx, css } from "@emotion/react";
 import * as React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -38,7 +37,6 @@ export default function Signup({
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const passwordConfirm = passwordConfirmRef.current.value;
-    // console.log({ userId, name, email, password });
     onSignup({ userId, name, email, password, passwordConfirm });
   };
   return (

@@ -1,15 +1,7 @@
-import {
-  Container,
-  Divider,
-  Grid,
-  Rating,
-  Typography,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Divider, Grid, Rating, Typography } from "@material-ui/core";
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
@@ -20,6 +12,23 @@ const ShowImg = styled.img`
       border: 2px solid rgb(67, 80, 165);
     `}
 `;
+
+const categoryReducer = (id) => {
+  switch (id) {
+    case 1:
+      return "티셔츠";
+    case 2:
+      return "과장";
+    case 3:
+      return "텀블러";
+    case 4:
+      return "스티커";
+    case 5:
+      return "담요";
+    default:
+      return "";
+  }
+};
 
 const Preview = ({ product, images }) => {
   const price = product.price.toLocaleString("ko") + "원";
@@ -116,6 +125,16 @@ const Preview = ({ product, images }) => {
             >
               <Divider />
             </Grid>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Typography sx={{ fontSize: "1.2rem" }}>
+              상품 설명 : {product.description}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Typography sx={{ fontSize: "1.2rem" }}>
+              카테고리 : {categoryReducer(product.categoryId)}
+            </Typography>
           </Grid>
           <Grid item xs={9}>
             <Typography variant="h4">가격 : {price}</Typography>

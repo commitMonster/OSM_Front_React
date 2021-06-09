@@ -28,7 +28,10 @@ const ProductListPaginationContainer = (props) => {
         pt: 3,
         pb: 3,
       }}
-      count={parseInt(itemCount / (params.pageSize || 10), 10) + 1}
+      count={
+        parseInt(itemCount / (params.pageSize || 10), 10) +
+        (itemCount % (params.pageSize || 10) === 0 ? 0 : 1)
+      }
       page={parseInt(params.page || 1, 10)}
       onChange={onPageChange}
     />

@@ -1,9 +1,15 @@
 import { Helmet } from "react-helmet-async";
-import { Box, Button, Container, Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import BannerCard from "./BannerCard";
 import { Link } from "react-router-dom";
 
-const BannerListTable = ({ bannerlist, onEdit, onDelete, onActivate }) => {
+const BannerListTable = ({
+  bannerlist,
+  onEdit,
+  onDelete,
+  onActivate,
+  onCreate,
+}) => {
   return (
     <>
       <Helmet>
@@ -18,8 +24,8 @@ const BannerListTable = ({ bannerlist, onEdit, onDelete, onActivate }) => {
             justifyContent: "flex-end",
           }}
         >
-          <Button color="primary" variant="contained">
-            <Link to="/admin/editBanner">공지/이벤트 추가</Link>
+          <Button color="primary" variant="contained" onClick={onCreate}>
+            공지/이벤트 추가
           </Button>
         </Grid>
         <Grid item container xs={12} m={2}>

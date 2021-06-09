@@ -4,7 +4,6 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 function Banner({ banners }) {
-  console.log(banners);
   const baseURL = "https://shop.dnatuna.fun/api/";
 
   return (

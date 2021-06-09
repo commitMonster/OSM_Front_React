@@ -1,11 +1,7 @@
 import {
-  Box,
-  Button,
   Container,
   Divider,
   Grid,
-  Input,
-  Modal,
   Rating,
   TextField,
   Typography,
@@ -13,7 +9,7 @@ import {
 } from "@material-ui/core";
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React, { useReducer, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
@@ -28,6 +24,23 @@ const ShowImg = styled.img`
       border: 2px solid rgb(67, 80, 165);
     `}
 `;
+
+const categoryReducer = (id) => {
+  switch (id) {
+    case 1:
+      return "티셔츠";
+    case 2:
+      return "과장";
+    case 3:
+      return "텀블러";
+    case 4:
+      return "스티커";
+    case 5:
+      return "담요";
+    default:
+      return "";
+  }
+};
 
 const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
   const price = product.price.toLocaleString("ko") + "원";
@@ -120,7 +133,7 @@ const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
                 <Grid item>
                   <Rating
                     name="score"
-                    value={product.score}
+                    value={product.score / 2}
                     readOnly
                     precision={0.5}
                   />
@@ -150,6 +163,16 @@ const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
               >
                 <Divider />
               </Grid>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Typography sx={{ fontSize: "1.2rem" }}>
+                상품 설명 : {product.description}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Typography sx={{ fontSize: "1.2rem" }}>
+                카테고리 : {categoryReducer(product.categoryId)}
+              </Typography>
             </Grid>
             <Grid item xs={9} md={9}>
               <Typography variant="h4">가격 : {price}</Typography>

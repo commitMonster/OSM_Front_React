@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { Box, Divider, Drawer, List } from "@material-ui/core";
 import {
   ShoppingBag as ShoppingBagIcon,
