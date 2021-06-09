@@ -41,21 +41,28 @@ const initialState = {
   user: null,
   count: 0,
   checkError: null,
+  success: null,
 };
 
 export default handleActions(
   {
     [INITIAL_USER]: (state) => initialState,
+    [CHECK]: (state) => ({
+      ...state,
+      success: false,
+    }),
     [CHECK_SUCCESS]: (state, { payload: user }) => ({
       ...state,
       user: user.user,
       count: user.count,
       checkError: null,
+      success: true,
     }),
     [CHECK_FAILURE]: (state, { payload: error }) => ({
       ...state,
       user: null,
       checkError: error,
+      success: true,
     }),
     [SIGNOUT]: (state) => ({
       ...state,

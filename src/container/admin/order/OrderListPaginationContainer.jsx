@@ -31,7 +31,7 @@ const OrderListPaginationContainer = (props) => {
         pt: 3,
         pb: 3,
       }}
-      count={parseInt(orderList.orderCount / (params.pageSize || 10), 10) + 1}
+      count={parseInt(orderList.orderCount / (params.pageSize || 3), 10) + 1}
       page={parseInt(params.page || 1, 10)}
       onChange={onPageChange}
     />

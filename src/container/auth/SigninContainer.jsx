@@ -37,6 +37,7 @@ const SigninContainer = (props) => {
         alert("관리자님 환영합니다!");
         history.push("/admin");
       } else {
+        alert(`${user.name}님 안녕하세요!`);
         history.push("/");
       }
     }

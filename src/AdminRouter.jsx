@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Router, useHistory } from "react-router-dom";
 import BannerPage from "./pages/admin/BannerPage";
@@ -9,19 +9,34 @@ import ProductPage from "./pages/admin/ProductPage";
 import ProductListPage from "./pages/admin/ProductListPage";
 import EditProductPage from "./pages/admin/EditProductPage";
 import OrderListPage from "./pages/admin/OrderListPage";
+import { check } from "./modules/user";
 
 const AdminRoute = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user } = useSelector((state) => state.user);
+  const { user, success } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
-    if (user && !user.isAdmin) {
-      alert("접근이 불가능합니다.");
+    setLoading(true);
+    dispatch(check());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!loading || !success) return;
+    if (!user) {
       history.push("/");
+      alert("접근이 불가능합니다.");
     }
-  }, [dispatch, user, history]);
+    if (user && !user.isAdmin) {
+      history.push("/");
+      alert("접근이 불가능합니다.");
+    }
+    setLoading(false);
+  }, [dispatch, user, history, success]);
+
+  if (loading) return null;
 
   return (
     <>
