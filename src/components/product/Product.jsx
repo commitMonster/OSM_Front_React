@@ -42,7 +42,7 @@ const categoryReducer = (id) => {
   }
 };
 
-const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
+const Product = ({ product, onAddBasket, onOrder, count, setCount, user }) => {
   const price = product.price.toLocaleString("ko") + "원";
   const baseURL = "https://shop.dnatuna.fun/api/";
 
@@ -178,17 +178,20 @@ const Product = ({ product, onAddBasket, onOrder, count, setCount }) => {
               <Typography variant="h4">가격 : {price}</Typography>
               <Typography variant="P">남은 수량 : {product.stock}</Typography>
             </Grid>
+
             <Grid item xs={3} md={3}>
-              <CustomButton
-                fullWidth
-                disableElevation
-                variant="contained"
-                onClick={() => {
-                  setOpen(true);
-                }}
-              >
-                배송지 선택
-              </CustomButton>
+              {user && (
+                <CustomButton
+                  fullWidth
+                  disableElevation
+                  variant="contained"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  배송지 선택
+                </CustomButton>
+              )}
             </Grid>
             <Grid item xs={9} md={12}>
               <Typography variant="P">

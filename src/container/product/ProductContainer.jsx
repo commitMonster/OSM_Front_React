@@ -10,6 +10,7 @@ import { check } from "../../modules/user";
 const ProductContainer = ({ productId }) => {
   const { product, error } = useSelector((state) => state.products);
   const { currentItem } = useSelector((state) => state.basket);
+  const { user } = useSelector((state) => state.user);
 
   const [count, setCount] = useState(1);
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ const ProductContainer = ({ productId }) => {
       onOrder={onOrder}
       count={count}
       setCount={setCount}
+      user={user}
     />
   );
 };

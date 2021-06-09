@@ -58,7 +58,10 @@ const AddressItem = ({
             variant="outlined"
             fullWidth
             size="small"
-            onClick={onEdit}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
           >
             수정
           </CustomButton>
@@ -68,7 +71,8 @@ const AddressItem = ({
             variant="outlined"
             fullWidth
             size="small"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               ondeleteDestination(destination.id);
             }}
           >
@@ -81,7 +85,8 @@ const AddressItem = ({
               variant="outlined"
               fullWidth
               size="small"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 handleSetDefault(destination);
               }}
             >
@@ -102,6 +107,10 @@ const AddressList = ({
   setCurrentDestination,
   onSelect,
 }) => {
+  const onCreate = () => {
+    setCurrentDestination(null);
+    setMode("create");
+  };
   return (
     <Grid container p={2}>
       <Grid
@@ -109,6 +118,7 @@ const AddressList = ({
         container
         xs={12}
         flexDirection="column"
+        flexWrap="nowrap"
         sx={{ height: "430px", overflow: "auto" }}
       >
         <Grid
@@ -127,6 +137,7 @@ const AddressList = ({
             if (destination.isDefault)
               return (
                 <AddressItem
+                  key={destination.id}
                   destination={destination}
                   handleSetDefault={handleSetDefault}
                   ondeleteDestination={ondeleteDestination}
@@ -153,6 +164,7 @@ const AddressList = ({
             if (!destination.isDefault)
               return (
                 <AddressItem
+                  key={destination.id}
                   destination={destination}
                   handleSetDefault={handleSetDefault}
                   ondeleteDestination={ondeleteDestination}
@@ -166,7 +178,7 @@ const AddressList = ({
       </Grid>
 
       <Grid item mt={2}>
-        <CustomButton fullWidth onClick={() => setMode("create")}>
+        <CustomButton fullWidth onClick={onCreate}>
           배송지 추가
         </CustomButton>
       </Grid>

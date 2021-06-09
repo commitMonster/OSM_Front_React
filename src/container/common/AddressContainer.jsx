@@ -46,7 +46,11 @@ const AddressContainer = ({ setOpen }) => {
 
   const setDefault = (before, next) => {
     setLoading(true);
-    dispatch(updateDestination({ ...before, id: before.id, isDefault: false }));
+
+    if (before)
+      dispatch(
+        updateDestination({ ...before, id: before.id, isDefault: false })
+      );
     dispatch(updateDestination({ ...next, id: next.id, isDefault: true }));
   };
 
